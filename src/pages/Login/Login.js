@@ -1,9 +1,24 @@
 import React from "react";
 import loginimg from "../../assets/login.svg";
 
+const API_URL = "http://131.181.190.87:3000";
+
 function Login() {
   function login() {
-    console.log("This is a test");
+    const url = `${API_URL}/user/login`;
+
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: "example@api.com", password: "asdlkfj1" }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        localStorage.setItem("token", res.token);
+      });
   }
 
   return (
@@ -25,8 +40,8 @@ function Login() {
                 class="form-control"
               />
             </div>
-            <button onClick={login}>Login</button>
           </form>
+          <button onClick={login}>Login</button>
           <p className="mt-4">
             No Account Yet? <a href="#">Register here </a>
           </p>

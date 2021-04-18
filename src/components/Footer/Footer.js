@@ -49,8 +49,8 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-md-4 col-sm-12">
-            <div className="d-md-flex flex-column align-items-end">
+          <div className="col-md-4 col-sm-12 ">
+            <div className="d-flex flex-column align-items-md-end">
               <div class="btn-container">
                 <Button className="btn btn-secondary my-3">View API</Button>
               </div>

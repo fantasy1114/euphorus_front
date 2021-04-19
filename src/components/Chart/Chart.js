@@ -6,14 +6,21 @@ function Chart() {
   const [testdata, setTestData] = useState({});
   let countryNames = [];
   let happinessScores = [];
-  let backgroundColors = [];
-  let backgroundColorOptions = [
+  let backgroundColors = [
     "rgba(255, 99, 132, 0.6)",
     "rgba(54, 162, 235, 0.6)",
     "rgba(255, 206, 86, 0.6)",
     "rgba(75, 192, 192, 0.6)",
     "rgba(153, 102, 255, 0.6)",
     "rgba(255, 159, 64, 0.6)",
+    "rgba(255, 99, 132, 0.6)",
+    "rgba(255, 99, 132, 0.6)",
+    "rgba(54, 162, 235, 0.6)",
+    "rgba(255, 206, 86, 0.6)",
+    "rgba(75, 192, 192, 0.6)",
+    "rgba(153, 102, 255, 0.6)",
+    "rgba(255, 159, 64, 0.6)",
+    "rgba(255, 99, 132, 0.6)",
     "rgba(255, 99, 132, 0.6)",
   ];
 
@@ -25,9 +32,6 @@ function Chart() {
       for (let i = 0; i < 15; i++) {
         countryNames.push(rankings[i].country);
         happinessScores.push(parseFloat(rankings[i].score));
-        backgroundColors.push(
-          backgroundColorOptions[Math.floor(Math.random() * 7)]
-        );
       }
     });
 

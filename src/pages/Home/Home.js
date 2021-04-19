@@ -33,8 +33,6 @@ function Home() {
       .then((happinessRankings) => setRowData(happinessRankings));
   }, []);
 
-  // Charts
-
   return (
     <div>
       <Jumbotron>

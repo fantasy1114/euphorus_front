@@ -1,97 +1,44 @@
-import { Component, React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
-
-// class Chart extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       chartData: {
-//             labels: [
-//             "Finland",
-//             "Denmark",
-//             "Switzerland",
-//             "Iceland",
-//             "Norway",
-//             "Netherlands",
-//             ],
-//             datasets: [
-//             {
-//                 label: "Happiness Index",
-//                 data: [7.809, 7.646, 7.56, 7.504, 7.488, 7.449],
-//                 backgroundColor: [
-//                 "rgba(255, 99, 132, 0.6)",
-//                 "rgba(54, 162, 235, 0.6)",
-//                 "rgba(255, 206, 86, 0.6)",
-//                 "rgba(75, 192, 192, 0.6)",
-//                 "rgba(153, 102, 255, 0.6)",
-//                 "rgba(255, 159, 64, 0.6)",
-//                 "rgba(255, 99, 132, 0.6)",
-//                 ],
-//             },
-//             ],
-//       },
-//     };
-//   }
-//   //   const [chartData, setChartData] = useState({
-//   //     chartData: {
-//   //       labels: [
-//   //         "Boston",
-//   //         "Worcester",
-//   //         "Springfield",
-//   //         "Lowell",
-//   //         "Cambridge",
-//   //         "New Bedford",
-//   //       ],
-//   //       datasets: [
-//   //         {
-//   //           label: "Population",
-//   //           data: [617594, 181045, 153060, 106519, 105162, 95072],
-//   //           backgroundColor: [
-//   //             "rgba(255, 99, 132, 0.6)",
-//   //             "rgba(54, 162, 235, 0.6)",
-//   //             "rgba(255, 206, 86, 0.6)",
-//   //             "rgba(75, 192, 192, 0.6)",
-//   //             "rgba(153, 102, 255, 0.6)",
-//   //             "rgba(255, 159, 64, 0.6)",
-//   //             "rgba(255, 99, 132, 0.6)",
-//   //           ],
-//   //         },
-//   //       ],
-//   //     },
-//   //   });
-//   render() {
-//     return (
-//       <div className="chart container my-5">
-//         <HorizontalBar data={this.state.chartData} options={{}} />
-//       </div>
-//     );
-//   }
-// }
+import axios from "axios";
 
 function Chart() {
+  const [testdata, setTestData] = useState({});
+  let countryNames = [];
+  let happinessScores = [];
+  let backgroundColors = [];
+  let backgroundColorOptions = [
+    "rgba(255, 99, 132, 0.6)",
+    "rgba(54, 162, 235, 0.6)",
+    "rgba(255, 206, 86, 0.6)",
+    "rgba(75, 192, 192, 0.6)",
+    "rgba(153, 102, 255, 0.6)",
+    "rgba(255, 159, 64, 0.6)",
+    "rgba(255, 99, 132, 0.6)",
+  ];
+
+  axios
+    .get("http://131.181.190.87:3000/rankings?year=2020")
+    .then((res) => res.data)
+    .then((rankings) => {
+      // console.log(rankings);
+      for (let i = 0; i < 15; i++) {
+        countryNames.push(rankings[i].country);
+        happinessScores.push(parseFloat(rankings[i].score));
+        backgroundColors.push(
+          backgroundColorOptions[Math.floor(Math.random() * 7)]
+        );
+      }
+    });
+
   const [chartData, setChartData] = useState({
     chartData: {
-      labels: [
-        "Finland",
-        "Denmark",
-        "Switzerland",
-        "Iceland",
-        "Norway",
-        "Netherlands",
-      ],
+      labels: countryNames,
       datasets: [
         {
           label: "Happiness Index",
-          data: [7.809, 7.646, 7.56, 7.504, 7.488, 7.449],
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.6)",
-            "rgba(54, 162, 235, 0.6)",
-            "rgba(255, 206, 86, 0.6)",
-            "rgba(75, 192, 192, 0.6)",
-            "rgba(153, 102, 255, 0.6)",
-            "rgba(255, 159, 64, 0.6)",
-            "rgba(255, 99, 132, 0.6)",
-          ],
+          data: happinessScores,
+          backgroundColor: backgroundColors,
         },
       ],
     },
@@ -99,7 +46,20 @@ function Chart() {
 
   return (
     <div className="chart container my-5">
-      <HorizontalBar data={chartData.chartData} options={{}} />
+      <HorizontalBar
+        data={chartData.chartData}
+        options={{
+          responsive: true,
+          title: { text: "Happiness Scores Per Country", display: true },
+          scales: {
+            xAxes: [
+              {
+                maxBarThickness: 100,
+              },
+            ],
+          },
+        }}
+      />
     </div>
   );
 }

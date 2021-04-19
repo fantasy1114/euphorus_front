@@ -5,6 +5,7 @@ import heroimg from "../../assets/header-img.svg";
 import "./Home.css";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+import Chart from "../../components/Chart/Chart";
 
 function Home() {
   const [rowData, setRowData] = useState([]);
@@ -32,7 +33,7 @@ function Home() {
       .then((happinessRankings) => setRowData(happinessRankings));
   }, []);
 
-  console.log(rowData);
+  // Charts
 
   return (
     <div>
@@ -78,6 +79,8 @@ function Home() {
           />
         </div>
       </div>
+
+      <Chart />
     </div>
   );
 }

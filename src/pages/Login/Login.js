@@ -2,6 +2,7 @@ import React from "react";
 import loginimg from "../../assets/login.svg";
 
 const API_URL = "http://131.181.190.87:3000";
+const token = localStorage.getItem("token");
 
 function Login() {
   function login() {

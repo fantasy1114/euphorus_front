@@ -33,11 +33,14 @@ function Navigation() {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="text-center ml-md-auto" navbar>
               <Link to="/login">
-                <Button color="link">Login</Button>
+                <Button color="link btn-rounded">Login</Button>
               </Link>
 
               <Link to="/register">
-                <Button color="primary" className="btn btn-primary w-100">
+                <Button
+                  color="primary"
+                  className="btn-rounded btn-primary w-100"
+                >
                   Register
                 </Button>
               </Link>

@@ -8,12 +8,13 @@
 
 /* Backgrounds */
 :root {
-  --primary-orange: var(#f96d5c);
+  --primary-orange: #f96d5c;
+  --light-grey: #fafafa;
 }
 
 /* Overide some of reactstrap styles */
 
-.btn {
+.btn-rounded {
   border-radius: 50px;
   padding: 0.5rem 1rem;
 }
@@ -50,6 +51,12 @@
 .btn-link:hover {
   color: #f96d5c;
   text-decoration: none;
+}
+
+/* Backgrounds */
+
+.bg-light-grey {
+  background-color: var(--light-grey);
 }
 
 /* Text */

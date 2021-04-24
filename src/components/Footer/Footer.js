@@ -52,7 +52,9 @@ function Footer() {
           <div className="col-md-4 col-sm-12 ">
             <div className="d-flex flex-column align-items-md-end">
               <div class="btn-container">
-                <Button className="btn btn-secondary my-3">View API</Button>
+                <Button className="btn-rounded btn-secondary my-3">
+                  View API
+                </Button>
               </div>
 
               <p className="text-white mt-2">© Euphorus. All Rights Reserved</p>

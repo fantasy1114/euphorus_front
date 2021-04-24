@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-// import axios from "axios";
 
-export default function useCountryData() {
-  //   const [loading, setLoading] = useState(true);
+export default function useCountryData(search) {
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getCountryData()
+    getCountryData(search)
       .then((happinessRankings) => {
         setRowData(happinessRankings);
         setLoading(false);
@@ -17,7 +15,7 @@ export default function useCountryData() {
         setError(e);
         setLoading(false);
       });
-  }, []);
+  }, [search]);
 
   return {
     loading,
@@ -26,8 +24,8 @@ export default function useCountryData() {
   };
 }
 
-function getCountryData() {
-  const url = "http://131.181.190.87:3000/rankings?year=2020";
+function getCountryData(search) {
+  const url = `http://131.181.190.87:3000/rankings?country=${search}`;
   return fetch(url)
     .then((res) => res.json())
     .then((rankings) =>

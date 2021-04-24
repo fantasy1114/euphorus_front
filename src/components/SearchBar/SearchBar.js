@@ -9,10 +9,12 @@ import {
   InputGroupText,
   Input,
   Button,
+  Form,
 } from "reactstrap";
 
 function SearchBar(props) {
   const [innerSearch, setInnerSearch] = useState("");
+  const [dropdownValue, setDropdownValue] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -26,18 +28,9 @@ function SearchBar(props) {
                 Country
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>Some Action</DropdownItem>
-                <DropdownItem>Foo Action</DropdownItem>
-                <DropdownItem>Bar Action</DropdownItem>
-                <DropdownItem>Quo Action</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-              <DropdownToggle className="" caret>
-                Year
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Some Action</DropdownItem>
+                <DropdownItem onClick={() => console.log("Clicked")}>
+                  Some Action
+                </DropdownItem>
                 <DropdownItem>Foo Action</DropdownItem>
                 <DropdownItem>Bar Action</DropdownItem>
                 <DropdownItem>Quo Action</DropdownItem>
@@ -46,30 +39,31 @@ function SearchBar(props) {
           </div>
         </div>
         <div className="col-5">
-          {/* <input
-            className="p-2"
-            type="text"
-            id="search"
-            name="search"
-            value={innerSearch}
-            onChange={(e) => setInnerSearch(e.target.value)}
-            aria-labelledby="search-button"
-          />
-          <button
-            className="btn btn-secondary p-2"
-            id="search-button"
-            type="button"
-            onClick={() => props.onSubmit(innerSearch)}
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.onSubmit(innerSearch);
+            }}
           >
-            Search
-          </button> */}
-
-          <InputGroup>
-            <Input placeholder="Search" />
-            <InputGroupAddon addonType="append">
-              <Button>Search</Button>
-            </InputGroupAddon>
-          </InputGroup>
+            <InputGroup>
+              <Input
+                placeholder="Search"
+                id="search"
+                value={innerSearch}
+                onChange={(e) => setInnerSearch(e.target.value)}
+                arialabelledby="search-button"
+              />
+              <InputGroupAddon addonType="append">
+                <Button
+                  id="search-button"
+                  type="button"
+                  onClick={() => props.onSubmit(innerSearch)}
+                >
+                  Search
+                </Button>
+              </InputGroupAddon>
+            </InputGroup>
+          </Form>
         </div>
       </div>
     </div>

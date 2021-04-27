@@ -1,6 +1,8 @@
-import { React, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../../App";
 import logo from "../../assets/logonew.PNG";
+import Greeting from "../../components/Greeting/Greeting";
 import "./Navigation.css";
 
 import {
@@ -17,6 +19,17 @@ import {
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  // const [messageVisible, setMessageVisible] = useState(true);
+  const messageVisible = useContext(ThemeContext);
+  // const token = localStorage.getItem("token");
+
+  // useEffect(() => {
+  //   if (token != null) {
+  //     setMessageVisible(true);
+  //   } else {
+  //     setMessageVisible(false);
+  //   }
+  // }, [token]);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -32,10 +45,12 @@ function Navigation() {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="text-center ml-md-auto" navbar>
+              {messageVisible ? <p>Welcome, User 👋</p> : null}
+              {/* <button onClick={() => !messageVisible}>Toggle Show</button> */}
+
               <Link to="/login">
                 <Button color="link btn-rounded">Login</Button>
               </Link>
-
               <Link to="/register">
                 <Button
                   color="primary"

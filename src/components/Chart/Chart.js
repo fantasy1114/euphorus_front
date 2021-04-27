@@ -1,11 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
-import useCountryData from "../../api";
 import axios from "axios";
 
 function Chart() {
-  const { loading, rowData, error } = useCountryData();
-
+  const [testdata, setTestData] = useState({});
   let countryNames = [];
   let happinessScores = [];
   let backgroundColors = [
@@ -35,8 +33,6 @@ function Chart() {
         happinessScores.push(parseFloat(rankings[i].score));
       }
     });
-
-  console.log("test");
 
   const [chartData, setChartData] = useState({
     chartData: {

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function useCountryData(search) {
+export default function useCountryData(searchCountry, searchYear) {
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getCountryData(search)
+    getCountryData(searchCountry, searchYear)
       .then((happinessRankings) => {
         setRowData(happinessRankings);
         setLoading(false);
@@ -15,7 +15,7 @@ export default function useCountryData(search) {
         setError(e);
         setLoading(false);
       });
-  }, [search]);
+  }, [searchCountry, searchYear]);
 
   return {
     loading,
@@ -24,8 +24,8 @@ export default function useCountryData(search) {
   };
 }
 
-function getCountryData(search) {
-  const url = `http://131.181.190.87:3000/rankings?country=${search}`;
+function getCountryData(searchCountry, searchYear) {
+  const url = `http://131.181.190.87:3000/rankings?year=${searchYear}&country=${searchCountry}`;
   return fetch(url)
     .then((res) => res.json())
     .then((rankings) =>

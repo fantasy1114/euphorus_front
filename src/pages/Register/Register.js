@@ -1,41 +1,70 @@
-import React from "react";
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
 import registerimg from "../../assets/register.svg";
+const API_URL = "http://131.181.190.87:3000";
 
 function Register() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function register() {
+    const url = `${API_URL}/user/register`;
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
   return (
     <div className="container">
       <div className="row mt-5">
-        <div className="col-md-6">
+        <div className="col-md-6 my-3">
           <h2>Register</h2>
-          <form action="" className="form mt-4">
+          <form className="form mt-4">
             <div className="form-group">
-              <label htmlFor="username">User Name</label>
               <input
-                id="username"
+                id="email"
                 type="text"
-                name="username"
-                class="form-control"
+                name="email"
+                placeholder="Email Address"
+                className="form-control"
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
               <input
                 id="password"
                 type="password"
                 name="password"
-                class="form-control"
+                placeholder="Password"
+                className="form-control"
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <input
               type="submit"
               id="submit"
-              class="btn btn-primary"
+              className="btn btn-primary"
               name="submit"
               value="Register"
+              onClick={(e) => {
+                e.preventDefault();
+                register();
+              }}
             />
           </form>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 my-3">
           <img className="img-fluid" src={registerimg} alt="" />
         </div>
       </div>

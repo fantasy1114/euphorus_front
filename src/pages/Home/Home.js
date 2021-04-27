@@ -5,7 +5,8 @@ import heroimg from "../../assets/header-img.svg";
 import "./Home.css";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-import CountriesTable from "../../components/CountriesTable/CountriesTable";
+import CountryRankings from "../../components/CountryRankings/CountryRankings";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import Chart from "../../components/Chart/Chart";
 
 function Home() {
@@ -33,8 +34,7 @@ function Home() {
       </Jumbotron>
 
       <section className="container py-1 px-3 rounded bg-light-grey">
-        <CountriesTable />
-        <Chart />
+        <CountryRankings />
       </section>
     </div>
   );

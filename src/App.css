@@ -59,6 +59,11 @@
   background-color: var(--light-grey);
 }
 
+/* Colors */
+.text-primary-orange {
+  color: var(--primary-orange);
+}
+
 /* Text */
 
 h1 {

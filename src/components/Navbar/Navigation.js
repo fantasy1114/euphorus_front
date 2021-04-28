@@ -45,9 +45,6 @@ function Navigation() {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="text-center ml-md-auto" navbar>
-              {messageVisible ? <p>Welcome, User 👋</p> : null}
-              {/* <button onClick={() => !messageVisible}>Toggle Show</button> */}
-
               <Link to="/login">
                 <Button color="link btn-rounded">Login</Button>
               </Link>

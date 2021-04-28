@@ -1,11 +1,13 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
+import { Alert } from "reactstrap";
 import registerimg from "../../assets/register.svg";
 const API_URL = "http://131.181.190.87:3000";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registerMessage, setRegisterMessage] = useState("");
 
   function register() {
     const url = `${API_URL}/user/register`;
@@ -20,6 +22,7 @@ function Register() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        setRegisterMessage(res.message);
       });
   }
 
@@ -28,6 +31,17 @@ function Register() {
       <div className="row mt-5">
         <div className="col-md-6 my-3">
           <h2>Register</h2>
+          {registerMessage !== "" && registerMessage !== "User created" ? (
+            <Alert color="danger">{registerMessage}</Alert>
+          ) : registerMessage === "User created" ? (
+            <Alert color="success">
+              Registration Successful! Click{" "}
+              <Link to="/login">
+                <u>here</u>
+              </Link>{" "}
+              to login
+            </Alert>
+          ) : null}
           <form className="form mt-4">
             <div className="form-group">
               <input

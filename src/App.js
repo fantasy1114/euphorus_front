@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import HomeAuthenticated from "./pages/HomeAuthenticated/HomeAuthenticated";
+
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Navigation from "./components/Navbar/Navigation";
@@ -28,6 +30,8 @@ function App() {
           <Navigation />
           <Switch>
             <Route path="/" exact component={Home}></Route>
+            <Route path="/factors" component={HomeAuthenticated}></Route>
+
             <Route path="/login" component={Login}></Route>
             <Route path="/register" component={Register}></Route>
           </Switch>

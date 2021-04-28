@@ -1,11 +1,13 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
+import { Alert } from "reactstrap";
 import loginimg from "../../assets/login.svg";
 const API_URL = "http://131.181.190.87:3000";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
 
   function login() {
     const url = `${API_URL}/user/login`;
@@ -23,6 +25,11 @@ function Login() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        if (res.message !== "" && res.message !== undefined) {
+          setLoginMessage(res.message);
+        } else {
+          setLoginMessage("Login Successful!");
+        }
         localStorage.setItem("token", res.token);
       });
   }
@@ -32,6 +39,11 @@ function Login() {
       <div className="row mt-5">
         <div className="col-md-6 my-3">
           <h2>Login</h2>
+          {loginMessage !== "" && loginMessage !== "Login Successful!" ? (
+            <Alert color="danger">{loginMessage}</Alert>
+          ) : loginMessage === "Login Successful!" ? (
+            <Alert color="success">{loginMessage}</Alert>
+          ) : null}
           <form className="form mt-4">
             <div className="form-group">
               <input
@@ -68,7 +80,7 @@ function Login() {
             </div>
           </form>
           <p className="mt-4">
-            No Account Yet? <a href="#">Register here </a>
+            No Account Yet? <Link to="/register">Register here</Link>
           </p>
         </div>
         <div className="col-md-6 my-3">

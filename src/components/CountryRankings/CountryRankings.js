@@ -10,7 +10,11 @@ import useCountryData from "../../api";
 function CountryRankings() {
   const [searchCountry, setSearchCountry] = useState("");
   const [searchYear, setSearchYear] = useState("");
-  const { loading, rowData, error } = useCountryData(searchCountry, searchYear);
+  const { loading, rowData, error } = useCountryData(
+    "rankings",
+    searchCountry,
+    searchYear
+  );
 
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },

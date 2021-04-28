@@ -1,19 +1,18 @@
 import React from "react";
-import "./Home.css";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-import CountryRankings from "../../components/CountryRankings/CountryRankings";
+import CountryFactors from "../../components/CounctryFactors/CountryFactors";
 import Hero from "../../components/Hero/Hero";
 
-function Home() {
+function HomeAuthenticated() {
   return (
     <div>
-      <Hero></Hero>
+      <Hero />
       <section className="container py-1 px-3 rounded bg-light-grey">
-        <CountryRankings />
+        <CountryFactors />
       </section>
     </div>
   );
 }
 
-export default Home;
+export default HomeAuthenticated;

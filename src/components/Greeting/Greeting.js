@@ -1,5 +1,4 @@
 import React from "react";
-const token = localStorage.getItem("token");
 
 function Greeting() {
   return (

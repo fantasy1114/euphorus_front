@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { ThemeContext } from "../../App";
 import logo from "../../assets/logonew.PNG";
 import Greeting from "../../components/Greeting/Greeting";
@@ -19,22 +19,26 @@ import {
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  // const [messageVisible, setMessageVisible] = useState(true);
-  const messageVisible = useContext(ThemeContext);
-  // const token = localStorage.getItem("token");
-
-  // useEffect(() => {
-  //   if (token != null) {
-  //     setMessageVisible(true);
-  //   } else {
-  //     setMessageVisible(false);
-  //   }
-  // }, [token]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
 
   const toggle = () => setIsOpen(!isOpen);
 
+  function logout() {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+  }
+
+  useEffect(() => {
+    if (token !== null) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [token]);
+
   return (
-    <div>
+    <div className="my-1">
       <Container>
         <Navbar light expand="md">
           <NavbarBrand>
@@ -45,8 +49,20 @@ function Navigation() {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="text-center ml-md-auto" navbar>
+              <Link to="/">
+                <Button color="link btn-rounded">Rankings</Button>
+              </Link>
+              <Link to="/factors">
+                <Button color="link btn-rounded">Factors</Button>
+              </Link>
+              {loggedIn ? (
+                <Button color="link btn-rounded" onClick={logout}>
+                  Logout
+                </Button>
+              ) : null}
+
               <Link to="/login">
-                <Button color="link btn-rounded">Login</Button>
+                <Button color="link btn-rounded mr-2">Login</Button>
               </Link>
               <Link to="/register">
                 <Button

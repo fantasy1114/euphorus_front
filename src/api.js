@@ -18,9 +18,17 @@ export default function useCountryData(route, searchCountry, searchYear) {
           setLoading(false);
         });
     } else if (route === "factors") {
-      getCountryFactors(searchCountry);
+      getCountryFactors(searchCountry, searchYear)
+        .then((countryFactors) => {
+          setRowData(countryFactors);
+          setLoading(false);
+        })
+        .catch((e) => {
+          setError(e);
+          setLoading(false);
+        });
     }
-  }, [searchCountry, searchYear]);
+  }, [route, searchCountry, searchYear]);
 
   return {
     loading,
@@ -49,16 +57,21 @@ const headers = {
   Authorization: `Bearer ${token}`,
 };
 
-function getCountryFactors(searchCountry) {
-  const url = `http://131.181.190.87:3000/factors/2020?country=${searchCountry}`;
-  return fetch(url, { headers }).then((res) => console.log(res.json()));
-
-  // .then((rankings) =>
-  //   rankings.map((ranking) => ({
-  //     rank: ranking.rank,
-  //     country: ranking.country,
-  //     score: ranking.score,
-
-  //   }))
-  // );
+function getCountryFactors(searchCountry, searchYear) {
+  const url = `http://131.181.190.87:3000/factors/${searchYear}?country=${searchCountry}`;
+  return fetch(url, { headers })
+    .then((res) => res.json())
+    .then((countries) =>
+      countries.map((country) => ({
+        rank: country.rank,
+        country: country.country,
+        score: country.score,
+        economy: country.economy,
+        family: country.family,
+        health: country.health,
+        freedom: country.freedom,
+        generosity: country.generosity,
+        trust: country.trust,
+      }))
+    );
 }

@@ -9,7 +9,7 @@ import useCountryData from "../../api";
 
 function CountryRankings() {
   const [searchCountry, setSearchCountry] = useState("");
-  const [searchYear, setSearchYear] = useState("");
+  const [searchYear, setSearchYear] = useState("2020");
   const { loading, rowData, error } = useCountryData(
     "rankings",
     searchCountry,
@@ -29,6 +29,7 @@ function CountryRankings() {
         onSubmitText={setSearchCountry}
         onSubmitCountry={setSearchCountry}
         onSubmitYear={setSearchYear}
+        defaultYear={searchYear}
       />
       <div
         className="ag-theme-alpine mx-auto "

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HomeAuthenticated from "./pages/HomeAuthenticated/HomeAuthenticated";
 
@@ -13,13 +18,15 @@ export const ThemeContext = React.createContext();
 
 function App() {
   const [messageVisible, setMessageVisible] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (token != null) {
-      setMessageVisible(true);
+    if (token !== null) {
+      setLoggedIn(true);
     } else {
-      setMessageVisible(false);
+      setLoggedIn(false);
     }
   }, [token]);
 
@@ -31,7 +38,6 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home}></Route>
             <Route path="/factors" component={HomeAuthenticated}></Route>
-
             <Route path="/login" component={Login}></Route>
             <Route path="/register" component={Register}></Route>
           </Switch>

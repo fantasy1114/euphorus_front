@@ -53,7 +53,7 @@ function Chart() {
         data={chartData.chartData}
         options={{
           responsive: true,
-          title: { text: "Happiness Scores Per Country", display: true },
+          title: { text: "Top 15 Happiness Scores Per Country", display: true },
           scales: {
             xAxes: [
               {

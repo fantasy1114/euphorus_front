@@ -19,7 +19,9 @@ function SearchBar(props) {
   const [yearsDropdownOpen, setYearsDropdownOpen] = useState(false);
   const [countryNames, setCountryNames] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("Country");
-  const [selectedYear, setSelectedYear] = useState("Year");
+  const [selectedYear, setSelectedYear] = useState(
+    "Year (" + props.defaultYear + ")"
+  );
   const years = [2020, 2019, 2018, 2017, 2016, 2015];
   const toggleCountryDrop = () =>
     setCountryDropdownOpen((prevState) => !prevState);
@@ -31,13 +33,13 @@ function SearchBar(props) {
     fetch(url)
       .then((res) => res.json())
       .then((countries) => setCountryNames(countries));
-  }, [countryNames]);
+  }, []);
 
   return (
     <div className="search-bar">
       <div className="row my-4">
-        <div className="col-7">
-          <div className="d-flex">
+        <div className="col-12 col-md-7">
+          <div className="d-flex mt-3 text=">
             <Dropdown
               className="mr-2"
               isOpen={countryDropdownOpen}
@@ -103,8 +105,9 @@ function SearchBar(props) {
             </Dropdown>
           </div>
         </div>
-        <div className="col-5">
+        <div className="col-12 col-md-5 ">
           <Form
+            className="mt-3"
             onSubmit={(e) => {
               e.preventDefault();
               setSelectedYear("Year");

@@ -16,6 +16,16 @@ function CountryRankings() {
     searchYear
   );
 
+  let topCountryNames = [];
+  let topHappinessScores = [];
+
+  if (rowData.length > 0) {
+    for (let i = 0; i < 15; i++) {
+      topCountryNames.push(rowData[i].country);
+      topHappinessScores.push(parseFloat(rowData[i].score));
+    }
+  }
+
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
     { headerName: "Country", field: "country" },
@@ -46,7 +56,13 @@ function CountryRankings() {
           domLayout="autoHeight"
         />
       </div>
-      <Chart />
+      <Chart
+        // top15Countries={topCountryNames}
+        // top15Scores={topHappinessScores}
+        countryNames={topCountryNames}
+        scores={topHappinessScores}
+        year={searchYear}
+      />
     </div>
   );
 }

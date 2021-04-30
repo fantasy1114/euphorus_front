@@ -2,10 +2,9 @@ import { React, useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
 import axios from "axios";
 
-function Chart() {
-  const [testdata, setTestData] = useState({});
-  let countryNames = [];
-  let happinessScores = [];
+function Chart(props) {
+  // let countryNames = [];
+  // let happinessScores = [];
   let backgroundColors = [
     "rgba(255, 99, 132, 0.6)",
     "rgba(54, 162, 235, 0.6)",
@@ -24,28 +23,71 @@ function Chart() {
     "rgba(255, 99, 132, 0.6)",
   ];
 
-  axios
-    .get("http://131.181.190.87:3000/rankings?year=2020")
-    .then((res) => res.data)
-    .then((rankings) => {
-      for (let i = 0; i < 15; i++) {
-        countryNames.push(rankings[i].country);
-        happinessScores.push(parseFloat(rankings[i].score));
-      }
-    });
+  // axios
+  //   .get(`http://131.181.190.87:3000/rankings?year=${props.year}`)
+  //   .then((res) => res.data)
+  //   .then((rankings) => {
+  //     for (let i = 0; i < 15; i++) {
+  //       countryNames.push(rankings[i].country);
+  //       happinessScores.push(parseFloat(rankings[i].score));
+  //     }
+  //   });
+
+  // console.log("New Data:");
+  // console.log(rowData);
+
+  // if (rowData.length > 0) {
+  //   for (let i = 0; i < 15; i++) {
+  //     countryNames.push(rowData[i].country);
+  //     happinessScores.push(parseFloat(rowData[i].score));
+  //   }
+  // }
 
   const [chartData, setChartData] = useState({
     chartData: {
-      labels: countryNames,
+      labels: props.countryNames,
       datasets: [
         {
           label: "Happiness Index",
-          data: happinessScores,
+          data: props.scores,
           backgroundColor: backgroundColors,
         },
       ],
     },
   });
+
+  // function updateChartData() {
+  //   setChartData({
+  //     chartData: {
+  //       labels: countryNames,
+  //       datasets: [
+  //         {
+  //           label: "Happiness Index",
+  //           data: happinessScores,
+  //           backgroundColor: backgroundColors,
+  //         },
+  //       ],
+  //     },
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   setChartData({
+  //     chartData: {
+  //       labels: countryNames,
+  //       datasets: [
+  //         {
+  //           label: "Happiness Index",
+  //           data: happinessScores,
+  //           backgroundColor: backgroundColors,
+  //         },
+  //       ],
+  //     },
+  //   });
+  // });
+
+  console.log(props.countryNames);
+  console.log(props.scores);
 
   return (
     <div className="chart container my-5">
@@ -53,7 +95,10 @@ function Chart() {
         data={chartData.chartData}
         options={{
           responsive: true,
-          title: { text: "Top 15 Happiness Scores Per Country", display: true },
+          title: {
+            text: `Top 15 Happiness Scores ${props.year}`,
+            display: true,
+          },
           scales: {
             xAxes: [
               {

@@ -53,7 +53,7 @@ function CountryFactors() {
             domLayout="autoHeight"
           />
         </div>
-        <Chart />
+        {/* <Chart /> */}
       </div>
     );
   } else {

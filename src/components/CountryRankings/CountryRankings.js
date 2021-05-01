@@ -16,15 +16,15 @@ function CountryRankings() {
     searchYear
   );
 
-  let topCountryNames = [];
-  let topHappinessScores = [];
+  // let topCountryNames = [];
+  // let topHappinessScores = [];
 
-  if (rowData.length > 0) {
-    for (let i = 0; i < 15; i++) {
-      topCountryNames.push(rowData[i].country);
-      topHappinessScores.push(parseFloat(rowData[i].score));
-    }
-  }
+  // if (rowData.length > 0) {
+  //   for (let i = 0; i < 15; i++) {
+  //     topCountryNames.push(rowData[i].country);
+  //     topHappinessScores.push(parseFloat(rowData[i].score));
+  //   }
+  // }
 
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
@@ -39,7 +39,9 @@ function CountryRankings() {
         onSubmitText={setSearchCountry}
         onSubmitCountry={setSearchCountry}
         onSubmitYear={setSearchYear}
-        defaultYear={searchYear}
+        currentYear={searchYear}
+        currentCountry="All"
+        showAllYearsOption={true}
       />
       <div
         className="ag-theme-alpine mx-auto "
@@ -57,10 +59,8 @@ function CountryRankings() {
         />
       </div>
       <Chart
-        // top15Countries={topCountryNames}
-        // top15Scores={topHappinessScores}
-        countryNames={topCountryNames}
-        scores={topHappinessScores}
+        // countryNames={topCountryNames}
+        // scores={topHappinessScores}
         year={searchYear}
       />
     </div>

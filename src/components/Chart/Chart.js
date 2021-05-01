@@ -5,6 +5,9 @@ import axios from "axios";
 function Chart(props) {
   // let countryNames = [];
   // let happinessScores = [];
+
+  const [chartData, setChartData] = useState({});
+
   let backgroundColors = [
     "rgba(255, 99, 132, 0.6)",
     "rgba(54, 162, 235, 0.6)",
@@ -43,18 +46,33 @@ function Chart(props) {
   //   }
   // }
 
-  const [chartData, setChartData] = useState({
-    chartData: {
-      labels: props.countryNames,
-      datasets: [
-        {
-          label: "Happiness Index",
-          data: props.scores,
-          backgroundColor: backgroundColors,
-        },
-      ],
-    },
-  });
+  // const [chartData, setChartData] = useState({
+  //   chartData: {
+  //     labels: props.countryNames,
+  //     datasets: [
+  //       {
+  //         label: "Happiness Index",
+  //         data: props.scores,
+  //         backgroundColor: backgroundColors,
+  //       },
+  //     ],
+  //   },
+  // });
+
+  useEffect(() => {
+    setChartData({
+      chartData: {
+        labels: props.countryNames,
+        datasets: [
+          {
+            label: "Happiness Index",
+            data: props.scores,
+            backgroundColor: backgroundColors,
+          },
+        ],
+      },
+    });
+  }, []);
 
   // function updateChartData() {
   //   setChartData({
@@ -85,9 +103,6 @@ function Chart(props) {
   //     },
   //   });
   // });
-
-  console.log(props.countryNames);
-  console.log(props.scores);
 
   return (
     <div className="chart container my-5">

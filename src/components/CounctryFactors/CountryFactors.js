@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import SearchBar from "../SearchBar/SearchBar";
 import Chart from "../Chart/Chart";
 import useCountryData from "../../api";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 function CountryFactors() {
   const [searchCountry, setSearchCountry] = useState("");
@@ -15,8 +15,6 @@ function CountryFactors() {
     searchCountry,
     searchYear
   );
-
-  const token = localStorage.getItem("token");
 
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
@@ -30,39 +28,34 @@ function CountryFactors() {
     { headerName: "Trust", field: "trust" },
   ];
 
-  if (token !== "" && token !== undefined && token !== null) {
-    return (
-      <div>
-        <SearchBar
-          onSubmitText={setSearchCountry}
-          onSubmitCountry={setSearchCountry}
-          onSubmitYear={setSearchYear}
+  return (
+    <div>
+      <SearchBar
+        onSubmitText={setSearchCountry}
+        onSubmitCountry={setSearchCountry}
+        onSubmitYear={setSearchYear}
+        currentYear={searchYear}
+        currentCountry="All"
+        showAllYears={false}
+      />
+      <div
+        className="ag-theme-alpine mx-auto "
+        style={{
+          height: "100%",
+        }}
+      >
+        <AgGridReact
+          columnDefs={columns}
+          rowData={rowData}
+          pagination={true}
+          paginationPageSize={40}
+          defaultColDef={{ flex: 1, minWidth: 100 }}
+          domLayout="autoHeight"
         />
-        <div
-          className="ag-theme-alpine mx-auto "
-          style={{
-            height: "100%",
-          }}
-        >
-          <AgGridReact
-            columnDefs={columns}
-            rowData={rowData}
-            pagination={true}
-            paginationPageSize={40}
-            defaultColDef={{ flex: 1, minWidth: 100 }}
-            domLayout="autoHeight"
-          />
-        </div>
-        {/* <Chart /> */}
       </div>
-    );
-  } else {
-    return (
-      <div>
-        <h1>Please login to use this page</h1>
-      </div>
-    );
-  }
+      {/* <Chart /> */}
+    </div>
+  );
 }
 
 export default CountryFactors;

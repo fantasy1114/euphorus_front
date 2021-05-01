@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-const token = localStorage.getItem("token");
 
 export default function useCountryData(route, searchCountry, searchYear) {
   const [loading, setLoading] = useState(true);
@@ -51,13 +50,15 @@ function getCountryRankings(searchCountry, searchYear) {
     );
 }
 
-const headers = {
-  accept: "application/json",
-  "Content-Type": "application/json",
-  Authorization: `Bearer ${token}`,
-};
-
 function getCountryFactors(searchCountry, searchYear) {
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
   const url = `http://131.181.190.87:3000/factors/${searchYear}?country=${searchCountry}`;
   return fetch(url, { headers })
     .then((res) => res.json())

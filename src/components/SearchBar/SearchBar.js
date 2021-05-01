@@ -6,7 +6,6 @@ import {
   DropdownItem,
   InputGroup,
   InputGroupAddon,
-  InputGroupText,
   Input,
   Button,
   Form,
@@ -17,17 +16,18 @@ function SearchBar(props) {
   const [innerSearch, setInnerSearch] = useState("");
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
   const [yearsDropdownOpen, setYearsDropdownOpen] = useState(false);
-  const [countryNames, setCountryNames] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("Country");
-  const [selectedYear, setSelectedYear] = useState(
-    "Year (" + props.defaultYear + ")"
+  const [selectedCountry, setSelectedCountry] = useState(
+    `${props.currentCountry}`
   );
+  const [selectedYear, setSelectedYear] = useState(`${props.currentYear}`);
+  const [countryNames, setCountryNames] = useState([]);
   const years = [2020, 2019, 2018, 2017, 2016, 2015];
+
   const toggleCountryDrop = () =>
     setCountryDropdownOpen((prevState) => !prevState);
   const toggleYearsDrop = () => setYearsDropdownOpen((prevState) => !prevState);
 
-  // Retrive country names for dropdown
+  // Fetch country names for dropdown
   useEffect(() => {
     const url = `http://131.181.190.87:3000/countries`;
     fetch(url)
@@ -40,6 +40,7 @@ function SearchBar(props) {
       <div className="row my-4">
         <div className="col-12 col-md-7">
           <div className="d-flex mt-3 text=">
+            <p class="my-2 mr-3">Country:</p>
             <Dropdown
               className="mr-2"
               isOpen={countryDropdownOpen}
@@ -48,12 +49,12 @@ function SearchBar(props) {
               <DropdownToggle className="" caret>
                 {selectedCountry}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu id="test">
                 <DropdownItem
                   value="SHOW ALL"
                   onClick={() => {
                     props.onSubmitCountry("");
-                    setSelectedCountry("Country (All)");
+                    setSelectedCountry("All");
                   }}
                 >
                   (Show all)
@@ -72,6 +73,8 @@ function SearchBar(props) {
               </DropdownMenu>
             </Dropdown>
 
+            <p class="my-2 mx-3">Year:</p>
+
             <Dropdown
               className="mr-2"
               isOpen={yearsDropdownOpen}
@@ -81,15 +84,18 @@ function SearchBar(props) {
                 {selectedYear}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem
-                  value="SHOW ALL"
-                  onClick={() => {
-                    props.onSubmitYear("");
-                    setSelectedYear("Year (All)");
-                  }}
-                >
-                  (Show all)
-                </DropdownItem>
+                {props.showAllYearsOption ? (
+                  <DropdownItem
+                    value="SHOW ALL"
+                    onClick={() => {
+                      props.onSubmitYear("");
+                      setSelectedYear("All");
+                    }}
+                  >
+                    (Show all)
+                  </DropdownItem>
+                ) : null}
+
                 {years.map((year) => (
                   <DropdownItem
                     value={year}
@@ -110,10 +116,10 @@ function SearchBar(props) {
             className="mt-3"
             onSubmit={(e) => {
               e.preventDefault();
-              setSelectedYear("Year");
+              setSelectedYear(props.currentYear);
               setSelectedCountry("Country");
               props.onSubmitText(innerSearch);
-              props.onSubmitYear("");
+              props.onSubmitYear(props.currentYear);
             }}
           >
             <InputGroup>
@@ -129,10 +135,11 @@ function SearchBar(props) {
                   id="search-button"
                   type="button"
                   onClick={() => {
-                    setSelectedYear("Year");
+                    setSelectedYear(props.currentYear);
                     setSelectedCountry("Country");
+
                     props.onSubmitText(innerSearch);
-                    props.onSubmitYear("");
+                    props.onSubmitYear(props.currentYear);
                   }}
                 >
                   Search

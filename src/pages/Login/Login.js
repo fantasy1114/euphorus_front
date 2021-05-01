@@ -1,13 +1,15 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import loginimg from "../../assets/login.svg";
+import { LoginContext } from "../../Helper/Context";
 const API_URL = "http://131.181.190.87:3000";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
 
   function login() {
     const url = `${API_URL}/user/login`;
@@ -24,13 +26,13 @@ function Login() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res.message !== "" && res.message !== undefined) {
           setLoginMessage(res.message);
         } else {
           setLoginMessage("Login Successful!");
+          setLoggedIn(true);
+          localStorage.setItem("token", res.token);
         }
-        localStorage.setItem("token", res.token);
       });
   }
 

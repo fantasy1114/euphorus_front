@@ -11,7 +11,13 @@ function ProtectedRoute({ isAuth: isAuth, component: Component, ...rest }) {
         } else {
           return (
             <Redirect
-              to={{ pathname: "/login", state: { from: props.location } }}
+              to={{
+                pathname: "/login",
+                state: {
+                  from: props.location,
+                  msg: "You must be logged in to view this page!",
+                },
+              }}
             />
           );
         }

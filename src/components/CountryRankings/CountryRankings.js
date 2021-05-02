@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import SearchBar from "../SearchBar/SearchBar";
@@ -16,15 +17,8 @@ function CountryRankings() {
     searchYear
   );
 
-  // let topCountryNames = [];
-  // let topHappinessScores = [];
-
-  // if (rowData.length > 0) {
-  //   for (let i = 0; i < 15; i++) {
-  //     topCountryNames.push(rowData[i].country);
-  //     topHappinessScores.push(parseFloat(rowData[i].score));
-  //   }
-  // }
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => setModal(!modal);
 
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
@@ -32,6 +26,29 @@ function CountryRankings() {
     { headerName: "Score", field: "score" },
     { headerName: "Year", field: "year" },
   ];
+
+  let topCountryNames = [];
+  let topHappinessScores = [];
+
+  if (rowData.length > 1) {
+    if (searchYear === "") {
+      // Clear chart data if no year is selected
+      topCountryNames = [];
+      topHappinessScores = [];
+    } else {
+      for (let i = 0; i < 15; i++) {
+        topCountryNames.push(rowData[i].country);
+        topHappinessScores.push(parseFloat(rowData[i].score));
+      }
+    }
+  }
+
+  // Show error message in modal if no search results are found
+  useEffect(() => {
+    if (rowData.length === 0 && loading === false) {
+      setModal(true);
+    }
+  }, [loading, rowData]);
 
   return (
     <div>
@@ -58,11 +75,32 @@ function CountryRankings() {
           domLayout="autoHeight"
         />
       </div>
-      <Chart
-        // countryNames={topCountryNames}
-        // scores={topHappinessScores}
-        year={searchYear}
-      />
+      {topCountryNames.length > 0 ? (
+        <Chart
+          category="Happiness Index"
+          countryNames={topCountryNames}
+          scores={topHappinessScores}
+          year={searchYear}
+        />
+      ) : null}
+
+      <Modal isOpen={modal} toggle={toggleModal} className="">
+        <ModalHeader toggle={toggleModal}>Error</ModalHeader>
+        <ModalBody>
+          Could not find a country matching '{searchCountry}'
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={() => {
+              toggleModal();
+              setSearchCountry("");
+            }}
+          >
+            Ok
+          </Button>{" "}
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }

@@ -81,3 +81,9 @@ h1 {
 p {
   font-size: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .jumbotron-heading {
+    font-size: 2rem;
+  }
+}

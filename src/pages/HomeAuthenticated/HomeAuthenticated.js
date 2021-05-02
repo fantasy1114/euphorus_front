@@ -14,7 +14,7 @@ function HomeAuthenticated() {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6 text-center text-md-left">
-              <h1>Country Happiness Factors</h1>
+              <h1 className="jumbotron-heading">Country Happiness Factors</h1>
               <p className="lead">Explore happiness factors by country</p>
               <Button className="btn-rounded" color="primary">
                 Learn More

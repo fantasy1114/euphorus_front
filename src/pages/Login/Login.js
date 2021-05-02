@@ -1,5 +1,5 @@
-import { React, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { React, useState, useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Alert } from "reactstrap";
 import loginimg from "../../assets/login.svg";
 import { LoginContext } from "../../Helper/Context";
@@ -10,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const history = useHistory();
 
   function login() {
     const url = `${API_URL}/user/login`;
@@ -32,6 +33,7 @@ function Login() {
           setLoginMessage("Login Successful!");
           setLoggedIn(true);
           localStorage.setItem("token", res.token);
+          history.push("/factors");
         }
       });
   }

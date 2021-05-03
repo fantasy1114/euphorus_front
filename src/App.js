@@ -9,6 +9,7 @@ import Navigation from "./components/Navbar/Navigation";
 import Footer from "./components/Footer/Footer";
 import "./App.css";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="/login" component={Login}></Route>
           <Route path="/register" component={Register}></Route>
+          <Route component={PageNotFound} />
         </Switch>
         <Footer />
       </Router>

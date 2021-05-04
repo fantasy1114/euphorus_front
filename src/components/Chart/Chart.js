@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
-import axios from "axios";
 
 function Chart(props) {
   const [chartData, setChartData] = useState({});

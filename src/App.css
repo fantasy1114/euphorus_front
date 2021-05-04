@@ -9,18 +9,14 @@
 /* Backgrounds */
 :root {
   --primary-orange: #f96d5c;
+  --secondary-blue: #5b82f7;
   --light-grey: #fafafa;
 }
 
-/* Overide some of reactstrap styles */
-
+/* Overide some of bootstrap styles */
 .btn-rounded {
   border-radius: 50px;
   padding: 0.5rem 1rem;
-}
-
-.badge-secondary {
-  background-color: #5b82f7;
 }
 
 .btn-primary {
@@ -58,7 +54,6 @@
 }
 
 /* Backgrounds */
-
 .bg-light-grey {
   background-color: var(--light-grey);
 }
@@ -69,7 +64,6 @@
 }
 
 /* Text */
-
 h1 {
   font-size: 3rem;
 }

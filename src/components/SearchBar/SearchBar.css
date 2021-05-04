@@ -2,3 +2,11 @@
   height: 300px;
   overflow-y: scroll;
 }
+
+.react-select-country {
+  min-width: 150px;
+}
+
+.react-select-year {
+  min-width: 120px;
+}

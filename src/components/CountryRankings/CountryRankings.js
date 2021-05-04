@@ -58,7 +58,7 @@ function CountryRankings() {
         onSubmitYear={setSearchYear}
         currentYear={searchYear}
         currentCountry="All"
-        showAllYearsOption={true}
+        showAllYears={true}
       />
       <div
         className="ag-theme-alpine mx-auto "

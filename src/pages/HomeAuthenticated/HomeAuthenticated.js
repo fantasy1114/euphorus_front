@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Jumbotron } from "reactstrap";
-import { LoginContext } from "../../Helper/Context";
 import CountryFactors from "../../components/CounctryFactors/CountryFactors";
 import factorsimg from "../../assets/factors.svg";
 import { withRouter } from "react-router-dom";

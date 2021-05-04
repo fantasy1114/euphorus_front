@@ -60,19 +60,21 @@ function SearchBar(props) {
               value={countryNames.filter(
                 (option) => option.label === selectedCountry
               )}
-              // defaultValue={countryNames.filter(
-              //   (option) => option.label === selectedCountry
-              // )}
               isClearable={isClearableCountry}
               onChange={(e) => {
                 if (e !== null) {
                   if (e.value === "All") {
                     props.onSubmitCountry("");
                     setSelectedCountry("All");
+                    if (isClearableCountry) {
+                      toggleClearableCountry();
+                    }
                   } else {
                     props.onSubmitCountry(e.value);
                     setSelectedCountry(e.value);
-                    toggleClearableCountry();
+                    if (!isClearableCountry) {
+                      toggleClearableCountry();
+                    }
                   }
                 } else {
                   props.onSubmitCountry("");
@@ -96,14 +98,25 @@ function SearchBar(props) {
                   if (e.value === "All") {
                     props.onSubmitYear("");
                     setSelectedYear("All");
-                    toggleClearableYear();
+                    console.log("here");
+                    if (!isClearableYear) {
+                      toggleClearableYear();
+                    }
                   } else {
                     props.onSubmitYear(e.value);
                     setSelectedYear(e.value);
-                    toggleClearableYear();
+                    if (!isClearableYear) {
+                      toggleClearableYear();
+                    }
                   }
                 } else {
-                  props.onSubmitYear("2020");
+                  if (selectedCountry === "All") {
+                    props.onSubmitCountry("");
+                    props.onSubmitYear("2020");
+                  } else {
+                    props.onSubmitCountry(selectedCountry);
+                    props.onSubmitYear("2020");
+                  }
                   setSelectedYear("2020");
                   toggleClearableYear();
                 }

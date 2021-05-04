@@ -30,13 +30,15 @@ function CountryRankings() {
   let topCountryNames = [];
   let topHappinessScores = [];
 
-  if (rowData.length > 1) {
+  if (rowData.length > 15) {
     if (searchYear === "") {
       // Clear chart data if no year is selected
       topCountryNames = [];
       topHappinessScores = [];
     } else {
       for (let i = 0; i < 15; i++) {
+        console.log(searchYear, searchCountry);
+        console.log(rowData);
         topCountryNames.push(rowData[i].country);
         topHappinessScores.push(parseFloat(rowData[i].score));
       }
@@ -75,13 +77,20 @@ function CountryRankings() {
           domLayout="autoHeight"
         />
       </div>
+
       {topCountryNames.length > 0 ? (
-        <Chart
-          category="Happiness Index"
-          countryNames={topCountryNames}
-          scores={topHappinessScores}
-          year={searchYear}
-        />
+        <>
+          <h3 className="text-center mt-5">
+            Top 15 Happiest Countries {searchYear}
+          </h3>
+
+          <Chart
+            category="Happiness Index"
+            countryNames={topCountryNames}
+            scores={topHappinessScores}
+            year={searchYear}
+          />
+        </>
       ) : null}
 
       <Modal isOpen={modal} toggle={toggleModal} className="">
@@ -94,7 +103,6 @@ function CountryRankings() {
             color="primary"
             onClick={() => {
               toggleModal();
-              setSearchCountry("");
             }}
           >
             Ok

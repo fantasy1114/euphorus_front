@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
+import Select from "react-select";
 import SearchBar from "../SearchBar/SearchBar";
 import Chart from "../Chart/Chart";
 import useCountryData from "../../api";
@@ -16,16 +17,17 @@ function CountryFactors() {
     searchCountry,
     searchYear
   );
-  const categories = [
-    "Economy",
-    "Family",
-    "Freedom",
-    "Generosity",
-    "Health",
-    "Trust",
-  ];
+  const [selectedFactor, setSelectedFactor] = useState("Economy");
+  const [selectedFactorData, setSelectedFactorData] = useState([]);
 
-  let allScores = [];
+  let factorOptions = [
+    { label: "Economy", value: "Economy" },
+    { label: "Family", value: "Family" },
+    { label: "Health", value: "Health" },
+    { label: "Freedom", value: "Freedom" },
+    { label: "Generosity", value: "Generosity" },
+    { label: "Trust", value: "Trust" },
+  ];
 
   let topCountryNames = [];
   let economyScores = [];
@@ -50,15 +52,6 @@ function CountryFactors() {
       generosityScores.push(rowData[i].generosity);
       trustScores.push(rowData[i].trust);
     }
-
-    // Add individual scores arrays to one 2d array
-    // so it is easier to loop through in return statement
-    allScores.push(economyScores);
-    allScores.push(familyScores);
-    allScores.push(healthScores);
-    allScores.push(freedomScores);
-    allScores.push(generosityScores);
-    allScores.push(trustScores);
   }
 
   const columns = [
@@ -72,6 +65,12 @@ function CountryFactors() {
     { headerName: "Generosity", field: "generosity" },
     { headerName: "Trust", field: "trust" },
   ];
+
+  useEffect(() => {
+    if (loading === false) {
+      setSelectedFactorData(economyScores);
+    }
+  }, [loading]);
 
   return (
     <div>
@@ -98,14 +97,43 @@ function CountryFactors() {
           domLayout="autoHeight"
         />
       </div>
-      {allScores.map((scores, index) => (
-        <Chart
-          category={categories[index]}
-          countryNames={topCountryNames}
-          scores={scores}
-          year={searchYear}
-        />
-      ))}
+      {topCountryNames.length > 0 ? (
+        <>
+          <h3 className="text-center mt-5">
+            Happiness Factors Comparison {searchYear}
+          </h3>
+          <h4 className="text-center text-muted">(Top 15 Countries)</h4>
+          <Select
+            options={factorOptions}
+            className="react-select-factor"
+            value={factorOptions.filter(
+              (option) => option.label === selectedFactor
+            )}
+            onChange={(e) => {
+              if (e.value === "Economy") {
+                setSelectedFactorData(economyScores);
+              } else if (e.value === "Family") {
+                setSelectedFactorData(familyScores);
+              } else if (e.value === "Health") {
+                setSelectedFactorData(healthScores);
+              } else if (e.value === "Freedom") {
+                setSelectedFactorData(freedomScores);
+              } else if (e.value === "Family") {
+                setSelectedFactorData(generosityScores);
+              } else if (e.value === "Trust") {
+                setSelectedFactorData(trustScores);
+              }
+              setSelectedFactor(e.value);
+            }}
+          />
+          <Chart
+            category={selectedFactor}
+            countryNames={topCountryNames}
+            scores={selectedFactorData}
+            year={searchYear}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

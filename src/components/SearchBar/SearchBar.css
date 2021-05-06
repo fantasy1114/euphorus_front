@@ -3,10 +3,20 @@
   overflow-y: scroll;
 }
 
-.react-select-country {
+/* .react-select-country {
   min-width: 170px;
 }
 
-.react-select-small {
+.react-select-year {
   min-width: 140px;
+} */
+
+.react-select-country {
+  min-width: 150px;
+  width: 100%;
+}
+
+.react-select-small {
+  min-width: 150px;
+  width: 100%;
 }

@@ -82,116 +82,116 @@ function SearchBar(props) {
 
   return (
     <div className="search-bar">
-      <div className="row my-4">
-        <div className="col-12 col-md-7">
-          <div className="d-flex mt-3 text=">
-            <p class="my-2 mr-3">Country:</p>
-
-            <Select
-              options={countryNames}
-              className="react-select-country"
-              value={countryNames.filter(
-                (option) => option.label === selectedCountry
-              )}
-              isClearable={isClearableCountry}
-              onChange={(e) => {
-                if (e !== null) {
-                  if (e.value === "All") {
-                    props.onSubmitCountry("");
-                    setSelectedCountry("All");
-                    if (isClearableCountry) {
-                      toggleClearableCountry();
-                    }
-                  } else {
-                    props.onSubmitCountry(e.value);
-                    setSelectedCountry(e.value);
-                    if (!isClearableCountry) {
-                      toggleClearableCountry();
-                    }
-                  }
-                } else {
+      <div className="row my-4 d-flex mt-3">
+        <div className="col-lg-3 col-sm-12 d-flex my-2 my-lg-0">
+          <p class="my-2 mr-3">Country:</p>
+          <Select
+            options={countryNames}
+            className="react-select-country"
+            value={countryNames.filter(
+              (option) => option.label === selectedCountry
+            )}
+            isClearable={isClearableCountry}
+            onChange={(e) => {
+              if (e !== null) {
+                if (e.value === "All") {
                   props.onSubmitCountry("");
                   setSelectedCountry("All");
-                  toggleClearableCountry();
-                }
-              }}
-            />
-
-            <p class="my-2 mx-3">Year:</p>
-
-            <Select
-              options={yearsOptions}
-              className="react-select-small"
-              value={yearsOptions.filter(
-                (option) => option.label === selectedYear
-              )}
-              isClearable={isClearableYear}
-              onChange={(e) => {
-                if (e !== null) {
-                  if (e.value === "All") {
-                    props.onSubmitYear("");
-                    setSelectedYear("All");
-                    if (!isClearableYear) {
-                      toggleClearableYear();
-                    }
-                  } else {
-                    props.onSubmitYear(e.value);
-                    setSelectedYear(e.value);
-                    if (!isClearableYear) {
-                      toggleClearableYear();
-                    }
+                  if (isClearableCountry) {
+                    toggleClearableCountry();
                   }
                 } else {
-                  if (selectedCountry === "All") {
-                    props.onSubmitCountry("");
-                    props.onSubmitYear("2020");
-                  } else {
-                    props.onSubmitCountry(selectedCountry);
-                    props.onSubmitYear("2020");
+                  props.onSubmitCountry(e.value);
+                  setSelectedCountry(e.value);
+                  if (!isClearableCountry) {
+                    toggleClearableCountry();
                   }
-                  setSelectedYear("2020");
-                  toggleClearableYear();
                 }
-              }}
-            />
+              } else {
+                props.onSubmitCountry("");
+                setSelectedCountry("All");
+                toggleClearableCountry();
+              }
+            }}
+          />
+        </div>
 
-            {props.showLimit ? (
-              <>
-                <p class="my-2 mx-3">Limit: </p>
+        <div className="col-lg-3 col-sm-12 d-flex my-2 my-lg-0">
+          <p class="my-2 mx-3">Year:</p>
+          <Select
+            options={yearsOptions}
+            className="react-select-small"
+            value={yearsOptions.filter(
+              (option) => option.label === selectedYear
+            )}
+            isClearable={isClearableYear}
+            onChange={(e) => {
+              if (e !== null) {
+                if (e.value === "All") {
+                  props.onSubmitYear("");
+                  setSelectedYear("All");
+                  if (!isClearableYear) {
+                    toggleClearableYear();
+                  }
+                } else {
+                  props.onSubmitYear(e.value);
+                  setSelectedYear(e.value);
+                  if (!isClearableYear) {
+                    toggleClearableYear();
+                  }
+                }
+              } else {
+                if (selectedCountry === "All") {
+                  props.onSubmitCountry("");
+                  props.onSubmitYear("2020");
+                } else {
+                  props.onSubmitCountry(selectedCountry);
+                  props.onSubmitYear("2020");
+                }
+                setSelectedYear("2020");
+                toggleClearableYear();
+              }
+            }}
+          />
+        </div>
 
-                <Select
-                  options={limitOptions}
-                  className="react-select-small"
-                  value={limitOptions.filter(
-                    (option) => option.label === selectedLimit
-                  )}
-                  isClearable={isClearableLimit}
-                  isDisabled={isLimitDisabled}
-                  onChange={(e) => {
-                    if (e !== null) {
-                      if (e.value === "All") {
-                        props.onSubmitLimit("200");
-                        setSelectedLimit("All");
-                        if (isClearableLimit) {
-                          toggleClearableLimit();
-                        }
-                      } else {
-                        props.onSubmitLimit(e.value);
-                        setSelectedLimit(e.value);
-                        if (!isClearableLimit) {
-                          toggleClearableLimit();
-                        }
-                      }
-                    } else {
+        <div className="col-lg-3 col-sm-12 d-flex my-2 my-lg-0">
+          {props.showLimit ? (
+            <>
+              <p class="my-2 mx-3">Limit: </p>
+
+              <Select
+                options={limitOptions}
+                className="react-select-small"
+                value={limitOptions.filter(
+                  (option) => option.label === selectedLimit
+                )}
+                isClearable={isClearableLimit}
+                isDisabled={isLimitDisabled}
+                onChange={(e) => {
+                  if (e !== null) {
+                    if (e.value === "All") {
                       props.onSubmitLimit("200");
                       setSelectedLimit("All");
-                      toggleClearableLimit();
+                      if (isClearableLimit) {
+                        toggleClearableLimit();
+                      }
+                    } else {
+                      props.onSubmitLimit(e.value);
+                      setSelectedLimit(e.value);
+                      if (!isClearableLimit) {
+                        toggleClearableLimit();
+                      }
                     }
-                  }}
-                />
-              </>
-            ) : null}
-          </div>
+                  } else {
+                    props.onSubmitLimit("200");
+                    setSelectedLimit("All");
+                    toggleClearableLimit();
+                  }
+                }}
+              />
+            </>
+          ) : null}
         </div>
       </div>
     </div>

@@ -60,7 +60,14 @@ function Navigation() {
                 </Button>
               ) : (
                 <>
-                  <Link to="/login">
+                  <Link
+                    to={{
+                      pathname: "/login",
+                      state: {
+                        msg: "",
+                      },
+                    }}
+                  >
                     <Button color="link btn-rounded mr-2 shadow-none">
                       Login
                     </Button>

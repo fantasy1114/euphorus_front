@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import "./App.css";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import ServerError from "./pages/ServerError/ServerError";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -36,6 +37,7 @@ function App() {
           />
           <Route path="/login" component={Login}></Route>
           <Route path="/register" component={Register}></Route>
+          <Route path="/503error" component={ServerError}></Route>
           <Route component={PageNotFound} />
         </Switch>
         <Footer />

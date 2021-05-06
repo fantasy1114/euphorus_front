@@ -9,6 +9,8 @@ function Register() {
   const [password, setPassword] = useState("");
   const [registerMessage, setRegisterMessage] = useState("");
 
+  document.title = "Euphorus | Register";
+
   function register() {
     const url = `${API_URL}/user/register`;
     return fetch(url, {

@@ -13,7 +13,7 @@ function SearchBar(props) {
   const [isClearableYear, setIsClearableYear] = useState(false);
   const [isClearableLimit, setIsClearableLimit] = useState(false);
   const [isLimitDisabled, setIsLimitDisabled] = useState(false);
-  const [limitOptions, setLimitOptions] = useState([]);
+  const [limitOptions, setLimitOptions] = useState(props.defaultLimitOptions);
 
   let yearsOptions = [
     { label: "2020", value: "2020" },
@@ -43,7 +43,12 @@ function SearchBar(props) {
     yearsOptions.unshift({ label: "All", value: "All" });
   }
 
-  // Populate limit once initally
+  // Default limit options from CountryFactors component
+  useEffect(() => {
+    setLimitOptions(props.defaultLimitOptions);
+  }, [props.defaultLimitOptions]);
+
+  // Update limit options when selected year changes
   useEffect(() => {
     let nums = Array.from({ length: props.rowData.length }, (_, i) => i + 1);
     nums.reverse();
@@ -52,7 +57,7 @@ function SearchBar(props) {
     });
     limitOptions.unshift({ label: "All", value: "All" });
     setLimitOptions(limitOptions);
-  }, [props.rowData]);
+  }, [selectedYear]);
 
   // Check if limit input should be disabled
   useEffect(() => {
@@ -126,7 +131,6 @@ function SearchBar(props) {
                   if (e.value === "All") {
                     props.onSubmitYear("");
                     setSelectedYear("All");
-                    console.log("here");
                     if (!isClearableYear) {
                       toggleClearableYear();
                     }
@@ -166,7 +170,6 @@ function SearchBar(props) {
                   onChange={(e) => {
                     if (e !== null) {
                       if (e.value === "All") {
-                        console.log("Clicked All");
                         props.onSubmitLimit("200");
                         setSelectedLimit("All");
                         if (isClearableLimit) {

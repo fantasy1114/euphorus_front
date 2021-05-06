@@ -40,8 +40,6 @@ function CountryRankings() {
       topHappinessScores = [];
     } else {
       for (let i = 0; i < 15; i++) {
-        console.log(searchYear, searchCountry);
-        console.log(rowData);
         topCountryNames.push(rowData[i].country);
         topHappinessScores.push(parseFloat(rowData[i].score));
       }
@@ -54,8 +52,6 @@ function CountryRankings() {
       setModal(true);
     }
   }, [loading, rowData]);
-
-  console.log("Num of results: " + rowData.length);
 
   return (
     <div>

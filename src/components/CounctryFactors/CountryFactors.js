@@ -14,6 +14,8 @@ function CountryFactors() {
   const history = useHistory();
   const [searchCountry, setSearchCountry] = useState("");
   const [searchYear, setSearchYear] = useState("2020");
+  const [defaultLimitOptions, setDefaultLimitOptions] = useState([]);
+
   // 200 set to default value if more countries are added in future
   const [searchLimit, setSearchLimit] = useState(200);
   const { loading, rowData, error } = useCountryData(
@@ -76,6 +78,13 @@ function CountryFactors() {
   useEffect(() => {
     if (loading === false) {
       setSelectedFactorData(economyScores);
+      let nums = Array.from({ length: rowData.length }, (_, i) => i + 1);
+      nums.reverse();
+      let limitOptions = nums.map(function (num) {
+        return { label: num, value: num };
+      });
+      limitOptions.unshift({ label: "All", value: "All" });
+      setDefaultLimitOptions(limitOptions);
     }
   }, [loading]);
 
@@ -91,6 +100,7 @@ function CountryFactors() {
         showAllYears={false}
         rowData={rowData}
         showLimit={true}
+        defaultLimitOptions={defaultLimitOptions}
       />
       {error === null ? (
         <>
@@ -145,9 +155,7 @@ function CountryFactors() {
                 year={searchYear}
               />
             </>
-          ) : (
-            console.log(topCountryNames.length)
-          )}
+          ) : null}
         </>
       ) : (
         // Redirect to Server error page

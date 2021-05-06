@@ -12,6 +12,7 @@ function SearchBar(props) {
   const [isClearableCountry, setIsClearableCountry] = useState(false);
   const [isClearableYear, setIsClearableYear] = useState(false);
   const [isClearableLimit, setIsClearableLimit] = useState(false);
+  const [isLimitDisabled, setIsLimitDisabled] = useState(false);
   const [limitOptions, setLimitOptions] = useState([]);
 
   let yearsOptions = [
@@ -51,6 +52,15 @@ function SearchBar(props) {
     });
     limitOptions.unshift({ label: "All", value: "All" });
     setLimitOptions(limitOptions);
+  }, [props.rowData]);
+
+  // Check if limit input should be disabled
+  useEffect(() => {
+    if (props.rowData.length <= 1) {
+      setIsLimitDisabled(true);
+    } else {
+      setIsLimitDisabled(false);
+    }
   }, [props.rowData]);
 
   function toggleClearableCountry() {
@@ -152,6 +162,7 @@ function SearchBar(props) {
                     (option) => option.label === selectedLimit
                   )}
                   isClearable={isClearableLimit}
+                  isDisabled={isLimitDisabled}
                   onChange={(e) => {
                     if (e !== null) {
                       if (e.value === "All") {

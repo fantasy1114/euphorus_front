@@ -1,12 +1,11 @@
 import React from "react";
-import CountryRankings from "../../components/CountryRankings/CountryRankings";
+import CountryRankings from "../components/CountryRankings/CountryRankings";
 import { Button, Jumbotron } from "reactstrap";
-import heroimg from "../../assets/header-img.svg";
-import "./Home.css";
+import heroimg from "../assets/header-img.svg";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
-function Home() {
+function Rankings() {
   return (
     <div>
       <Jumbotron>
@@ -36,4 +35,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Rankings;

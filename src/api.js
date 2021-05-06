@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-export default function useCountryData(route, searchCountry, searchYear) {
+export default function useCountryData(
+  route,
+  searchCountry,
+  searchYear,
+  searchLimit
+) {
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
   const [error, setError] = useState(null);
@@ -17,7 +22,7 @@ export default function useCountryData(route, searchCountry, searchYear) {
           setLoading(false);
         });
     } else if (route === "factors") {
-      getCountryFactors(searchCountry, searchYear)
+      getCountryFactors(searchCountry, searchYear, searchLimit)
         .then((countryFactors) => {
           setRowData(countryFactors);
           setLoading(false);
@@ -27,7 +32,7 @@ export default function useCountryData(route, searchCountry, searchYear) {
           setLoading(false);
         });
     }
-  }, [route, searchCountry, searchYear]);
+  }, [route, searchCountry, searchYear, searchLimit]);
 
   return {
     loading,
@@ -50,7 +55,7 @@ function getCountryRankings(searchCountry, searchYear) {
     );
 }
 
-function getCountryFactors(searchCountry, searchYear) {
+function getCountryFactors(searchCountry, searchYear, searchLimit) {
   const token = localStorage.getItem("token");
 
   const headers = {
@@ -59,7 +64,7 @@ function getCountryFactors(searchCountry, searchYear) {
     Authorization: `Bearer ${token}`,
   };
 
-  const url = `http://131.181.190.87:3000/factors/${searchYear}?country=${searchCountry}`;
+  const url = `http://131.181.190.87:3000/factors/${searchYear}?limit=${searchLimit}&country=${searchCountry}`;
   return fetch(url, { headers })
     .then((res) => res.json())
     .then((countries) =>

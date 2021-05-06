@@ -14,10 +14,13 @@ function CountryFactors() {
   const history = useHistory();
   const [searchCountry, setSearchCountry] = useState("");
   const [searchYear, setSearchYear] = useState("2020");
+  // 200 set to default value if more countries are added in future
+  const [searchLimit, setSearchLimit] = useState(200);
   const { loading, rowData, error } = useCountryData(
     "factors",
     searchCountry,
-    searchYear
+    searchYear,
+    searchLimit
   );
   const [selectedFactor, setSelectedFactor] = useState("Economy");
   const [selectedFactorData, setSelectedFactorData] = useState([]);
@@ -41,7 +44,7 @@ function CountryFactors() {
   let generosityScores = [];
   let trustScores = [];
 
-  if (rowData.length > 1) {
+  if (rowData.length >= 15 && searchLimit >= 15) {
     // Get country names once
     for (let i = 0; i < 15; i++) {
       topCountryNames.push(rowData[i].country);
@@ -82,9 +85,12 @@ function CountryFactors() {
         onSubmitText={setSearchCountry}
         onSubmitCountry={setSearchCountry}
         onSubmitYear={setSearchYear}
+        onSubmitLimit={setSearchLimit}
         currentYear={searchYear}
         currentCountry="All"
         showAllYears={false}
+        rowData={rowData}
+        showLimit={true}
       />
       {error === null ? (
         <>
@@ -139,7 +145,9 @@ function CountryFactors() {
                 year={searchYear}
               />
             </>
-          ) : null}
+          ) : (
+            console.log(topCountryNames.length)
+          )}
         </>
       ) : (
         // Redirect to Server error page

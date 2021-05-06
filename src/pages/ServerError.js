@@ -1,26 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import pagenotfound from "../../assets/pagenotfound.svg";
+import servererror from "../assets/503error.svg";
 
-function PageNotFound() {
+function ServerError() {
   return (
     <div className="container">
       <div className="row align-items-center my-5">
         <div className="col-md-6">
-          <h2>Oh No! Error 404.</h2>
-          <p>The page your looking for could not be found</p>
+          <h2>Internal Server Error</h2>
+          <p>There was a problem fetching the country data</p>
           <Link to="/">
             <Button className="btn-rounded">Back to Home</Button>
           </Link>
         </div>
 
         <div className="col-md-6">
-          <img className="img-fluid" src={pagenotfound} alt="pagenotfound" />
+          <img className="img-fluid" src={servererror} alt="pagenotfound" />
         </div>
       </div>
     </div>
   );
 }
 
-export default PageNotFound;
+export default ServerError;

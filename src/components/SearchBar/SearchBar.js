@@ -7,9 +7,12 @@ function SearchBar(props) {
     `${props.currentCountry}`
   );
   const [selectedYear, setSelectedYear] = useState(`${props.currentYear}`);
+  const [selectedLimit, setSelectedLimit] = useState("All");
   const [countryNames, setCountryNames] = useState([]);
   const [isClearableCountry, setIsClearableCountry] = useState(false);
   const [isClearableYear, setIsClearableYear] = useState(false);
+  const [isClearableLimit, setIsClearableLimit] = useState(false);
+  const [limitOptions, setLimitOptions] = useState([]);
 
   let yearsOptions = [
     { label: "2020", value: "2020" },
@@ -39,12 +42,27 @@ function SearchBar(props) {
     yearsOptions.unshift({ label: "All", value: "All" });
   }
 
+  // Populate limit once initally
+  useEffect(() => {
+    let nums = Array.from({ length: props.rowData.length }, (_, i) => i + 1);
+    nums.reverse();
+    let limitOptions = nums.map(function (num) {
+      return { label: num, value: num };
+    });
+    limitOptions.unshift({ label: "All", value: "All" });
+    setLimitOptions(limitOptions);
+  }, [props.rowData]);
+
   function toggleClearableCountry() {
     setIsClearableCountry(!isClearableCountry);
   }
 
   function toggleClearableYear() {
     setIsClearableYear(!isClearableYear);
+  }
+
+  function toggleClearableLimit() {
+    setIsClearableLimit(!isClearableLimit);
   }
 
   return (
@@ -88,7 +106,7 @@ function SearchBar(props) {
 
             <Select
               options={yearsOptions}
-              className="react-select-year"
+              className="react-select-small"
               value={yearsOptions.filter(
                 (option) => option.label === selectedYear
               )}
@@ -122,6 +140,43 @@ function SearchBar(props) {
                 }
               }}
             />
+
+            {props.showLimit ? (
+              <>
+                <p class="my-2 mx-3">Limit: </p>
+
+                <Select
+                  options={limitOptions}
+                  className="react-select-small"
+                  value={limitOptions.filter(
+                    (option) => option.label === selectedLimit
+                  )}
+                  isClearable={isClearableLimit}
+                  onChange={(e) => {
+                    if (e !== null) {
+                      if (e.value === "All") {
+                        console.log("Clicked All");
+                        props.onSubmitLimit("200");
+                        setSelectedLimit("All");
+                        if (isClearableLimit) {
+                          toggleClearableLimit();
+                        }
+                      } else {
+                        props.onSubmitLimit(e.value);
+                        setSelectedLimit(e.value);
+                        if (!isClearableLimit) {
+                          toggleClearableLimit();
+                        }
+                      }
+                    } else {
+                      props.onSubmitLimit("200");
+                      setSelectedLimit("All");
+                      toggleClearableLimit();
+                    }
+                  }}
+                />
+              </>
+            ) : null}
           </div>
         </div>
       </div>

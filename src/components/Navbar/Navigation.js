@@ -14,7 +14,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import logo from "../../assets/logonew.PNG";
+import logo from "../../assets/logo.PNG";
 import "./Navigation.css";
 
 function Navigation() {

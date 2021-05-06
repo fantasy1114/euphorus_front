@@ -55,7 +55,7 @@ function CountryRankings() {
     }
   }, [loading, rowData]);
 
-  console.log("Error: " + error);
+  console.log("Num of results: " + rowData.length);
 
   return (
     <div>
@@ -66,6 +66,8 @@ function CountryRankings() {
         currentYear={searchYear}
         currentCountry="All"
         showAllYears={true}
+        rowData={rowData}
+        showLimit={false}
       />
       {error === null ? (
         <>

@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logonewwhite.png";
+import logo from "../../assets/logowhite.png";
 import { Button } from "reactstrap";
 import "./Footer.css";
 

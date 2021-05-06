@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LoginContext } from "./Helper/Context";
-import Home from "./pages/Home/Home";
-import HomeAuthenticated from "./pages/HomeAuthenticated/HomeAuthenticated";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import Rankings from "./pages/Rankings";
+import Factors from "./pages/Factors";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Navigation from "./components/Navbar/Navigation";
 import Footer from "./components/Footer/Footer";
 import "./App.css";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import ServerError from "./pages/ServerError/ServerError";
+import PageNotFound from "./pages/PageNotFound";
+import ServerError from "./pages/ServerError";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -29,10 +29,10 @@ function App() {
       <Router>
         <Navigation />
         <Switch>
-          <Route path="/" exact component={Home}></Route>
+          <Route path="/" exact component={Rankings}></Route>
           <ProtectedRoute
             path="/factors"
-            component={HomeAuthenticated}
+            component={Factors}
             isAuth={loggedIn}
           />
           <Route path="/login" component={Login}></Route>

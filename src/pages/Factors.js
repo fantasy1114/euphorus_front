@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Jumbotron } from "reactstrap";
-import CountryFactors from "../../components/CounctryFactors/CountryFactors";
-import factorsimg from "../../assets/factors.svg";
+import CountryFactors from "../components/CounctryFactors/CountryFactors";
+import factorsimg from "../assets/factors.svg";
 import { withRouter } from "react-router-dom";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
-function HomeAuthenticated() {
+function Factors() {
   return (
     <div>
       <Jumbotron>
@@ -33,4 +33,4 @@ function HomeAuthenticated() {
   );
 }
 
-export default withRouter(HomeAuthenticated);
+export default withRouter(Factors);

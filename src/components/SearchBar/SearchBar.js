@@ -14,6 +14,9 @@ function SearchBar(props) {
   const [isClearableLimit, setIsClearableLimit] = useState(false);
   const [isLimitDisabled, setIsLimitDisabled] = useState(false);
   const [limitOptions, setLimitOptions] = useState(props.defaultLimitOptions);
+  const [limtOptionsLength, setLimitOptionsLength] = useState(
+    props.rowData.length
+  );
 
   let yearsOptions = [
     { label: "2020", value: "2020" },
@@ -43,6 +46,23 @@ function SearchBar(props) {
     yearsOptions.unshift({ label: "All", value: "All" });
   }
 
+  // Gets the length amount of limit options available for selected year
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    const url = `http://131.181.190.87:3000/factors/${selectedYear}`;
+    fetch(url, { headers })
+      .then((res) => res.json())
+      .then((countries) => {
+        setLimitOptionsLength(countries.length);
+      });
+  }, [selectedYear]);
+
   // Default limit options from CountryFactors component
   useEffect(() => {
     setLimitOptions(props.defaultLimitOptions);
@@ -50,23 +70,23 @@ function SearchBar(props) {
 
   // Update limit options when selected year changes
   useEffect(() => {
-    let nums = Array.from({ length: props.rowData.length }, (_, i) => i + 1);
+    let nums = Array.from({ length: limtOptionsLength }, (_, i) => i + 1);
     nums.reverse();
     let limitOptions = nums.map(function (num) {
       return { label: num, value: num };
     });
     limitOptions.unshift({ label: "All", value: "All" });
     setLimitOptions(limitOptions);
-  }, [selectedYear]);
+  }, [selectedYear, limtOptionsLength]);
 
   // Check if limit input should be disabled
   useEffect(() => {
-    if (props.rowData.length <= 1) {
+    if (selectedCountry !== "All") {
       setIsLimitDisabled(true);
     } else {
       setIsLimitDisabled(false);
     }
-  }, [props.rowData]);
+  }, [selectedCountry]);
 
   function toggleClearableCountry() {
     setIsClearableCountry(!isClearableCountry);
@@ -79,6 +99,21 @@ function SearchBar(props) {
   function toggleClearableLimit() {
     setIsClearableLimit(!isClearableLimit);
   }
+
+  // function getLimitOptionsLength(searchYear) {
+  //   const token = localStorage.getItem("token");
+
+  //   const headers = {
+  //     accept: "application/json",
+  //     "Content-Type": "application/json",
+  //     Authorization: `Bearer ${token}`,
+  //   };
+
+  //   const url = `http://131.181.190.87:3000/factors/${searchYear}`;
+  //   return fetch(url, { headers })
+  //     .then((res) => res.json())
+  //     .then((countries) => console.log(countries));
+  // }
 
   return (
     <div className="search-bar">

@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import Select from "react-select";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import SearchBar from "../SearchBar/SearchBar";
 import Chart from "../Chart/Chart";
 import useCountryData from "../../api";
@@ -26,6 +26,9 @@ function CountryFactors() {
   );
   const [selectedFactor, setSelectedFactor] = useState("Economy");
   const [selectedFactorData, setSelectedFactorData] = useState([]);
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => setModal(!modal);
 
   document.title = "Euphorus | Happiness Factors";
 
@@ -87,6 +90,12 @@ function CountryFactors() {
       setDefaultLimitOptions(limitOptions);
     }
   }, [loading]);
+
+  useEffect(() => {
+    if (rowData.length === 0 && loading === false) {
+      setModal(true);
+    }
+  }, [loading, rowData]);
 
   return (
     <div>
@@ -156,6 +165,22 @@ function CountryFactors() {
               />
             </>
           ) : null}
+          <Modal isOpen={modal} toggle={toggleModal} className="">
+            <ModalHeader toggle={toggleModal}>Error</ModalHeader>
+            <ModalBody>
+              Could not find data for '{searchCountry}' in year '{searchYear}'
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="primary"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                Ok
+              </Button>{" "}
+            </ModalFooter>
+          </Modal>
         </>
       ) : (
         // Redirect to Server error page

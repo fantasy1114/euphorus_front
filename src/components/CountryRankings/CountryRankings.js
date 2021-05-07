@@ -101,7 +101,7 @@ function CountryRankings() {
           <Modal isOpen={modal} toggle={toggleModal} className="">
             <ModalHeader toggle={toggleModal}>Error</ModalHeader>
             <ModalBody>
-              Could not find a country matching '{searchCountry}'
+              Could not find data for '{searchCountry}' in year '{searchYear}'
             </ModalBody>
             <ModalFooter>
               <Button

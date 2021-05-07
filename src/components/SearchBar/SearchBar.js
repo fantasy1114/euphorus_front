@@ -106,7 +106,7 @@ function SearchBar(props) {
     <div className="search-bar">
       <div className="row my-4 d-flex mt-3">
         <div className="col-lg-3 col-sm-12 d-flex my-2 my-lg-0">
-          <p class="my-2 mr-3">Country:</p>
+          <p class="my-2 mr-3 d-none d-sm-block">Country:</p>
           <Select
             options={countryNames}
             className="react-select-country"
@@ -139,7 +139,7 @@ function SearchBar(props) {
         </div>
 
         <div className="col-lg-3 col-sm-12 d-flex my-2 my-lg-0">
-          <p class="my-2 mx-3">Year:</p>
+          <p class="my-2 mx-3 d-none d-sm-block">Year:</p>
           <Select
             options={yearsOptions}
             className="react-select-small"

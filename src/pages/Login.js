@@ -6,13 +6,12 @@ import { LoginContext } from "../Helper/Context";
 const API_URL = "http://131.181.190.87:3000";
 
 function Login(props) {
+  document.title = "Euphorus | Login";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState(props.location.state.msg);
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const history = useHistory();
-
-  document.title = "Euphorus | Login";
 
   function login() {
     const url = `${API_URL}/user/login`;

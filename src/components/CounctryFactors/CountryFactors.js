@@ -11,12 +11,13 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "./CountryFactors.css";
 
 function CountryFactors() {
+  document.title = "Euphorus | Happiness Factors";
   const history = useHistory();
   const [searchCountry, setSearchCountry] = useState("");
   const [searchYear, setSearchYear] = useState("2020");
   const [defaultLimitOptions, setDefaultLimitOptions] = useState([]);
 
-  // 200 set to default value if more countries are added in future
+  // Default search limit is 200 incase more countries to API later
   const [searchLimit, setSearchLimit] = useState(200);
   const { loading, rowData, error } = useCountryData(
     "factors",
@@ -30,8 +31,6 @@ function CountryFactors() {
 
   const toggleModal = () => setModal(!modal);
 
-  document.title = "Euphorus | Happiness Factors";
-
   let factorOptions = [
     { label: "Economy", value: "Economy" },
     { label: "Family", value: "Family" },
@@ -41,6 +40,7 @@ function CountryFactors() {
     { label: "Trust", value: "Trust" },
   ];
 
+  // Chart data for each factor
   let topCountryNames = [];
   let economyScores = [];
   let familyScores = [];
@@ -66,6 +66,7 @@ function CountryFactors() {
     }
   }
 
+  // Table column names
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
     { headerName: "Country", field: "country" },
@@ -78,6 +79,7 @@ function CountryFactors() {
     { headerName: "Trust", field: "trust" },
   ];
 
+  // Set limit options dropown initially after request finshes loading
   useEffect(() => {
     if (loading === false) {
       setSelectedFactorData(economyScores);
@@ -91,6 +93,7 @@ function CountryFactors() {
     }
   }, [loading]);
 
+  // Show error modal if no results come back
   useEffect(() => {
     if (rowData.length === 0 && loading === false) {
       setModal(true);

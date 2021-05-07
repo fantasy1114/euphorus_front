@@ -5,11 +5,10 @@ import registerimg from "../assets/register.svg";
 const API_URL = "http://131.181.190.87:3000";
 
 function Register() {
+  document.title = "Euphorus | Register";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registerMessage, setRegisterMessage] = useState("");
-
-  document.title = "Euphorus | Register";
 
   function register() {
     const url = `${API_URL}/user/register`;

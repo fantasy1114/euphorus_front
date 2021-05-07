@@ -10,6 +10,7 @@ import Chart from "../Chart/Chart";
 import useCountryData from "../../api";
 
 function CountryRankings() {
+  document.title = "Euphorus | Happiness Rankings";
   const history = useHistory();
   const [searchCountry, setSearchCountry] = useState("");
   const [searchYear, setSearchYear] = useState("2020");
@@ -18,12 +19,10 @@ function CountryRankings() {
     searchCountry,
     searchYear
   );
-
-  document.title = "Euphorus | Happiness Rankings";
-
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
 
+  // Table column names
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
     { headerName: "Country", field: "country" },

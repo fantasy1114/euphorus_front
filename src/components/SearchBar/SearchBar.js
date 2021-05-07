@@ -46,7 +46,7 @@ function SearchBar(props) {
     yearsOptions.unshift({ label: "All", value: "All" });
   }
 
-  // Gets the length amount of limit options available for selected year
+  // Gets the total amount of limit options available for selected year (e.g. 153)
   useEffect(() => {
     const token = localStorage.getItem("token");
     const headers = {
@@ -88,6 +88,8 @@ function SearchBar(props) {
     }
   }, [selectedCountry]);
 
+  // Functions for clearning input search
+
   function toggleClearableCountry() {
     setIsClearableCountry(!isClearableCountry);
   }
@@ -99,21 +101,6 @@ function SearchBar(props) {
   function toggleClearableLimit() {
     setIsClearableLimit(!isClearableLimit);
   }
-
-  // function getLimitOptionsLength(searchYear) {
-  //   const token = localStorage.getItem("token");
-
-  //   const headers = {
-  //     accept: "application/json",
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${token}`,
-  //   };
-
-  //   const url = `http://131.181.190.87:3000/factors/${searchYear}`;
-  //   return fetch(url, { headers })
-  //     .then((res) => res.json())
-  //     .then((countries) => console.log(countries));
-  // }
 
   return (
     <div className="search-bar">

@@ -45,10 +45,10 @@ function Navigation() {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="text-center ml-md-auto" navbar>
               <Link to="/">
-                <Button color="link btn-rounded shadow-none">Rankings</Button>
+                <Button color="link shadow-none">Rankings</Button>
               </Link>
               <Link to="/factors">
-                <Button color="link btn-rounded shadow-none">Factors</Button>
+                <Button color="link shadow-none">Factors</Button>
               </Link>
               {loggedIn ? (
                 <Button
@@ -68,9 +68,7 @@ function Navigation() {
                       },
                     }}
                   >
-                    <Button color="link btn-rounded mr-2 shadow-none">
-                      Login
-                    </Button>
+                    <Button color="link shadow-none">Login</Button>
                   </Link>
                   <Link to="/register">
                     <Button

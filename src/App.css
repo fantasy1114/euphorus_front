@@ -14,6 +14,11 @@
 }
 
 /* Overide some of bootstrap styles */
+
+.btn {
+  border: none;
+}
+
 .btn-rounded {
   border-radius: 50px;
   padding: 0.5rem 1rem;
@@ -42,11 +47,21 @@
 
 .btn-link {
   color: #333;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 1rem;
 }
 
 .btn-link:hover {
   color: #f96d5c;
   text-decoration: none;
+}
+
+.btn-link:focus {
+  text-decoration: none;
+  color: #f96d5c;
+  border-bottom: 2px solid #f96d5c;
 }
 
 .jumbotron {

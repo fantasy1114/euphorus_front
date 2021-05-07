@@ -81,3 +81,15 @@ p {
     font-size: 2rem;
   }
 }
+
+/* Custom Scrollbar for WebKit based browsers*/
+/* (Chrome, Edge, Opera, Safari, all browsers on iOS) */
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#f96d5c 0%, #f7bb97 100%);
+  border-radius: 6px;
+}

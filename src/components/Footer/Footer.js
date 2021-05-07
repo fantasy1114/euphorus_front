@@ -14,17 +14,17 @@ function Footer() {
           <div className="col-md-2 col-sm-12">
             <ul className="list-unstyled">
               <li className="my-3">
-                <a className="text-white" href="#">
+                <a className="text-white" href="">
                   About Us
                 </a>
               </li>
               <li className="my-3">
-                <a className="text-white" href="#">
+                <a className="text-white" href="">
                   Contact
                 </a>
               </li>
               <li className="my-3">
-                <a className="text-white" href="#">
+                <a className="text-white" href="">
                   Blog
                 </a>
               </li>
@@ -33,17 +33,17 @@ function Footer() {
           <div className="col-md-2 col-sm-12">
             <ul className="list-unstyled">
               <li className="my-3">
-                <a className="text-white" href="#">
+                <a className="text-white" href="">
                   API
                 </a>
               </li>
               <li className="my-3">
-                <a className="text-white" href="#">
+                <a className="text-white" href="">
                   FAQ
                 </a>
               </li>
               <li className="my-2">
-                <a className="text-white" href="#">
+                <a className="text-white" href="">
                   Use Cases
                 </a>
               </li>

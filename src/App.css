@@ -73,6 +73,10 @@
   background-color: var(--light-grey);
 }
 
+.bg-secondary-blue {
+  background: var(--secondary-blue);
+}
+
 /* Colors */
 .text-primary-orange {
   color: var(--primary-orange);

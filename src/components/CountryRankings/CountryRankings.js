@@ -2,7 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { useHistory } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Badge,
+} from "reactstrap";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import SearchBar from "../SearchBar/SearchBar";
@@ -19,6 +26,7 @@ function CountryRankings() {
     searchCountry,
     searchYear
   );
+  const [resultMessage, setResultMessage] = useState("");
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
 
@@ -52,6 +60,23 @@ function CountryRankings() {
     }
   }, [loading, rowData]);
 
+  // Set result message
+  useEffect(() => {
+    if (searchCountry === "") {
+      if (searchYear === "") {
+        setResultMessage("Results for countries across all years");
+      } else {
+        setResultMessage(`Results for countries in ${searchYear}`);
+      }
+    } else {
+      if (searchYear === "") {
+        setResultMessage(`Results for ${searchCountry} for all years`);
+      } else {
+        setResultMessage(`Result for ${searchCountry} in ${searchYear}`);
+      }
+    }
+  }, [rowData]);
+
   return (
     <div>
       <SearchBar
@@ -66,6 +91,11 @@ function CountryRankings() {
       />
       {error === null ? (
         <>
+          <p>
+            <Badge className="bg-secondary-blue">{rowData.length}</Badge>{" "}
+            {resultMessage}
+          </p>
+
           <div
             className="ag-theme-alpine mx-auto "
             style={{

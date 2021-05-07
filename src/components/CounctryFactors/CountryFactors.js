@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import Select from "react-select";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Badge,
+} from "reactstrap";
 import SearchBar from "../SearchBar/SearchBar";
 import Chart from "../Chart/Chart";
 import useCountryData from "../../api";
@@ -25,6 +32,7 @@ function CountryFactors() {
     searchYear,
     searchLimit
   );
+  const [resultMessage, setResultMessage] = useState("");
   const [selectedFactor, setSelectedFactor] = useState("Economy");
   const [selectedFactorData, setSelectedFactorData] = useState([]);
   const [modal, setModal] = useState(false);
@@ -100,6 +108,15 @@ function CountryFactors() {
     }
   }, [loading, rowData]);
 
+  // Set result message
+  useEffect(() => {
+    if (searchCountry === "") {
+      setResultMessage(`Results for countries in ${searchYear}`);
+    } else {
+      setResultMessage(`Result for ${searchCountry} in ${searchYear}`);
+    }
+  }, [rowData]);
+
   return (
     <div>
       <SearchBar
@@ -116,6 +133,11 @@ function CountryFactors() {
       />
       {error === null ? (
         <>
+          <p>
+            <Badge className="bg-secondary-blue">{rowData.length}</Badge>{" "}
+            {resultMessage}
+          </p>
+
           <div
             className="ag-theme-alpine mx-auto "
             style={{

@@ -25,11 +25,11 @@ function Chart(props) {
   useEffect(() => {
     setChartData({
       chartData: {
-        labels: props.countryNames,
+        labels: props.yAxis,
         datasets: [
           {
             label: props.category,
-            data: props.scores,
+            data: props.xAxis,
             backgroundColor: backgroundColors,
           },
         ],
@@ -44,7 +44,7 @@ function Chart(props) {
         options={{
           responsive: true,
           title: {
-            text: `${props.category} Scores ${props.year}`,
+            text: `${props.category} Scores ${props.label}`,
             display: true,
           },
           scales: {

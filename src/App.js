@@ -5,6 +5,7 @@ import Rankings from "./pages/Rankings";
 import Factors from "./pages/Factors";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import CountryDetails from "./pages/CountryDetails";
 import Navigation from "./components/Navbar/Navigation";
 import Footer from "./components/Footer/Footer";
 import "./App.css";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" component={Login}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/503error" component={ServerError}></Route>
+          <Route path="/details" component={CountryDetails}></Route>
           <Route component={PageNotFound} />
         </Switch>
         <Footer />

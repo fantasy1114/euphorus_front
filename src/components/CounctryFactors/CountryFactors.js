@@ -184,9 +184,9 @@ function CountryFactors() {
               />
               <Chart
                 category={selectedFactor}
-                countryNames={topCountryNames}
-                scores={selectedFactorData}
-                year={searchYear}
+                yAxis={topCountryNames}
+                xAxis={selectedFactorData}
+                label={searchYear}
               />
             </>
           ) : null}

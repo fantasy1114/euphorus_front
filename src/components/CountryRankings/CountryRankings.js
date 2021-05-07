@@ -109,6 +109,13 @@ function CountryRankings() {
               paginationPageSize={40}
               defaultColDef={{ flex: 1, minWidth: 100 }}
               domLayout="autoHeight"
+              onRowClicked={(row) =>
+                history.push({
+                  pathname: `/details`,
+                  search: `?country=${row.data.country}`,
+                  state: { data: rowData },
+                })
+              }
             />
           </div>
 
@@ -120,9 +127,9 @@ function CountryRankings() {
 
               <Chart
                 category="Happiness Index"
-                countryNames={topCountryNames}
-                scores={topHappinessScores}
-                year={searchYear}
+                yAxis={topCountryNames}
+                xAxis={topHappinessScores}
+                label={searchYear}
               />
             </>
           ) : null}

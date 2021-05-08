@@ -35,32 +35,38 @@ function CountryDetails(props) {
       <h2>{countryName}</h2>
 
       <div className="row mt-5 mb-3">
-        <div className="col-12 col-lg-6">
-          <div
-            className="ag-theme-alpine mx-auto "
-            style={{
-              height: "100%",
-            }}
-          >
-            <AgGridReact
-              columnDefs={columns}
-              rowData={rowData}
-              pagination={true}
-              paginationPageSize={40}
-              defaultColDef={{ flex: 1, minWidth: 100 }}
-              domLayout="autoHeight"
-            />
-          </div>
-        </div>
+        {loading === false ? (
+          <>
+            <div className="col-12 col-lg-6">
+              <div
+                className="ag-theme-alpine mx-auto "
+                style={{
+                  height: "100%",
+                }}
+              >
+                <AgGridReact
+                  columnDefs={columns}
+                  rowData={rowData}
+                  pagination={true}
+                  paginationPageSize={40}
+                  defaultColDef={{ flex: 1, minWidth: 100 }}
+                  domLayout="autoHeight"
+                />
+              </div>
+            </div>
 
-        <div className="col-12 col-lg-6">
-          <Chart
-            category="Happiness Index"
-            yAxis={years}
-            xAxis={happinessScores}
-            label={countryName}
-          />
-        </div>
+            <div className="col-12 col-lg-6">
+              <Chart
+                category="Happiness Index"
+                yAxis={years}
+                xAxis={happinessScores}
+                label={countryName}
+              />
+            </div>
+          </>
+        ) : (
+          <h3 className="mx-auto">Loading...</h3>
+        )}
       </div>
 
       <Button

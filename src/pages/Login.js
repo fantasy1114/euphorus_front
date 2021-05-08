@@ -2,7 +2,7 @@ import { React, useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "reactstrap";
 import loginimg from "../assets/login.svg";
-import { LoginContext } from "../Helper/Context";
+import { LoginContext } from "../helper/Context";
 const API_URL = "http://131.181.190.87:3000";
 
 function Login(props) {
@@ -89,7 +89,11 @@ function Login(props) {
           </p>
         </div>
         <div className="col-md-6 my-3">
-          <img className="img-fluid" src={loginimg} alt="" />
+          <img
+            className="img-fluid"
+            src={loginimg}
+            alt="Laptop with lock on the screen"
+          />
         </div>
       </div>
     </div>

@@ -23,7 +23,11 @@ function Rankings() {
             </div>
 
             <div className="col-md-6">
-              <img className="img-fluid" src={heroimg} alt="hero image"></img>
+              <img
+                className="img-fluid"
+                src={heroimg}
+                alt="Two people running through field"
+              ></img>
             </div>
           </div>
         </div>

@@ -14,14 +14,18 @@ function Factors() {
           <div className="row align-items-center">
             <div className="col-md-6 text-center text-md-left">
               <h1 className="jumbotron-heading">Country Happiness Factors</h1>
-              <p className="lead">Explore happiness factors by country</p>
+              <p className="lead">Explore happiness factors by country.</p>
               <Button className="btn-rounded" color="primary">
                 Learn More
               </Button>
             </div>
 
             <div className="col-md-6">
-              <img className="img-fluid" src={factorsimg} alt="hero"></img>
+              <img
+                className="img-fluid"
+                src={factorsimg}
+                alt="Location markers on globe"
+              ></img>
             </div>
           </div>
         </div>

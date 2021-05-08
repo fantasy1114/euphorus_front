@@ -80,7 +80,11 @@ function Register() {
           </form>
         </div>
         <div className="col-md-6 my-3">
-          <img className="img-fluid" src={registerimg} alt="" />
+          <img
+            className="img-fluid"
+            src={registerimg}
+            alt="Person putting password into form"
+          />
         </div>
       </div>
     </div>

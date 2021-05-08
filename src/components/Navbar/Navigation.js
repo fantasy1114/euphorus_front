@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { LoginContext } from "../../Helper/Context";
-import { Link, Redirect } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { LoginContext } from "../../helper/Context";
+import { Link } from "react-router-dom";
 import {
   Container,
   Button,

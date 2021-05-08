@@ -80,7 +80,6 @@ function CountryRankings() {
   return (
     <div>
       <SearchBar
-        onSubmitText={setSearchCountry}
         onSubmitCountry={setSearchCountry}
         onSubmitYear={setSearchYear}
         currentYear={searchYear}

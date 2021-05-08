@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/logowhite.png";
 import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -14,14 +15,14 @@ function Footer() {
           <div className="col-md-2 col-sm-12">
             <ul className="list-unstyled">
               <li className="my-3">
-                <a className="text-white" href="">
-                  About Us
-                </a>
+                <Link to="/" className="text-white">
+                  Rankings
+                </Link>
               </li>
               <li className="my-3">
-                <a className="text-white" href="">
-                  Contact
-                </a>
+                <Link to="/factors" className="text-white">
+                  Factors
+                </Link>
               </li>
               <li className="my-3">
                 <a className="text-white" href="">
@@ -34,17 +35,17 @@ function Footer() {
             <ul className="list-unstyled">
               <li className="my-3">
                 <a className="text-white" href="">
-                  API
+                  About Us
                 </a>
               </li>
               <li className="my-3">
                 <a className="text-white" href="">
-                  FAQ
+                  Use Cases
                 </a>
               </li>
               <li className="my-2">
                 <a className="text-white" href="">
-                  Use Cases
+                  API
                 </a>
               </li>
             </ul>

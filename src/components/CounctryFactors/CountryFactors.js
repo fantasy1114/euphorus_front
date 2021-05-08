@@ -120,7 +120,6 @@ function CountryFactors() {
   return (
     <div>
       <SearchBar
-        onSubmitText={setSearchCountry}
         onSubmitCountry={setSearchCountry}
         onSubmitYear={setSearchYear}
         onSubmitLimit={setSearchLimit}

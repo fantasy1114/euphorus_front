@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
@@ -7,9 +7,10 @@ import useCountryData from "../api";
 
 function CountryDetails(props) {
   const history = useHistory();
-  const [tableData, setTableData] = useState([]);
   const params = new URLSearchParams(useLocation().search);
   const countryName = params.get("country");
+
+  // Empty string as third parameter retrieves all years
   const { loading, rowData, error } = useCountryData(
     "rankings",
     countryName,

@@ -37,8 +37,15 @@ function Register() {
           ) : registerMessage === "User created" ? (
             <Alert color="success">
               Registration Successful! Click{" "}
-              <Link to="/login">
-                <u>here</u>
+              <Link
+                to={{
+                  pathname: "/login",
+                  state: {
+                    msg: "",
+                  },
+                }}
+              >
+                here
               </Link>{" "}
               to login
             </Alert>

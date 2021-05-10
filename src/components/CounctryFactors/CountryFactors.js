@@ -39,6 +39,7 @@ function CountryFactors() {
 
   const toggleModal = () => setModal(!modal);
 
+  // For the factors dropdown
   let factorOptions = [
     { label: "Economy", value: "Economy" },
     { label: "Family", value: "Family" },

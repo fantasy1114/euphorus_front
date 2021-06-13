@@ -29,7 +29,7 @@ function SearchBar(props) {
 
   // Fetch country names for dropdown
   useEffect(() => {
-    const url = `http://131.181.190.87:3000/countries`;
+    const url = `https://salty-refuge-23420.herokuapp.com/countries`;
     fetch(url)
       .then((res) => res.json())
       .then((countries) => {

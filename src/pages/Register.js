@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import registerimg from "../assets/register.svg";
-const API_URL = "http://131.181.190.87:3000";
+const API_URL = "https://salty-refuge-23420.herokuapp.com";
 
 function Register() {
   document.title = "Euphorus | Register";

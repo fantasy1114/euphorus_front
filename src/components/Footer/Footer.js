@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
+  const openApi = () =>  window.location.href="https://salty-refuge-23420.herokuapp.com/";
   return (
     <footer className="mt-5 py-4">
       <div className="footer-main container text-center text-md-left">
@@ -53,7 +54,7 @@ function Footer() {
           <div className="col-md-4 col-sm-12 ">
             <div className="d-flex flex-column align-items-md-end">
               <div class="btn-container">
-                <Button className="btn-rounded btn-secondary my-3">
+                <Button className="btn-rounded btn-secondary my-3" onClick={() => openApi()}>
                   View API
                 </Button>
               </div>

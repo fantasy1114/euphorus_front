@@ -61,7 +61,6 @@
 .btn-link:focus {
   text-decoration: none;
   color: #f96d5c;
-  border-bottom: 2px solid #f96d5c;
 }
 
 .jumbotron {

@@ -31,7 +31,7 @@ Using NPM:
 $ npm install
 ```
 
-You will now need to replace the API URLs with the localhost url of the backend 'cab230assignment2' server. Run cab230assignment2 server first, and then start the cab230assignment1 react app.
+You will now need to replace the API URLs with the localhost url of the backend 'cab230assignment2' server. The API urls are located within api.js. Run cab230assignment2 server first, and then start the cab230assignment1 react app.
 
 To start the application
 

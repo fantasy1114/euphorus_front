@@ -16,10 +16,10 @@ From your command line, first clone this repo:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/ben04rogers/cab230assignment1.git
+$ git clone https://github.com/ben04rogers/country-happiness-frontend.git
 
 # Go into the repository
-$ cd cab230assignment1
+$ cd country-happiness-frontend
 ```
 
 Then you can install the dependencies using NPM or Yarn:

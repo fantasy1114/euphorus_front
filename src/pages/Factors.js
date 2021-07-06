@@ -21,7 +21,7 @@ function Factors() {
               <Button
                 className="btn-rounded"
                 color="primary"
-                onClick={() => openWikiPage()}
+                onClick={openWikiPage}
               >
                 Learn More
               </Button>

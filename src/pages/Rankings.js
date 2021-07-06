@@ -8,7 +8,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 function Rankings() {
   const openWikiPage = () =>
     (window.location.href =
-      "https://en.wikipedia.org/wiki/World_Happiness_Report");
+      "https://en.wikipedia.org/wiki/World_Happiness_Report/");
   return (
     <div>
       <Jumbotron>

@@ -6,6 +6,9 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 function Rankings() {
+  const openWikiPage = () =>
+    (window.location.href =
+      "https://en.wikipedia.org/wiki/World_Happiness_Report");
   return (
     <div>
       <Jumbotron>
@@ -17,7 +20,11 @@ function Rankings() {
                 Euphorus measures what matters - sustainable wellbeing for all.
                 Browse the below data and view by country.
               </p>
-              <Button className="btn-rounded" color="primary">
+              <Button
+                className="btn-rounded"
+                color="primary"
+                onClick={() => openWikiPage()}
+              >
                 Learn More
               </Button>
             </div>

@@ -7,6 +7,9 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 function Factors() {
+  const openWikiPage = () =>
+    (window.location.href =
+      "https://en.wikipedia.org/wiki/World_Happiness_Report");
   return (
     <div>
       <Jumbotron>
@@ -15,7 +18,11 @@ function Factors() {
             <div className="col-md-6 text-center text-md-left">
               <h1 className="jumbotron-heading">Country Happiness Factors</h1>
               <p className="lead">Explore happiness factors by country.</p>
-              <Button className="btn-rounded" color="primary">
+              <Button
+                className="btn-rounded"
+                color="primary"
+                onClick={() => openWikiPage()}
+              >
                 Learn More
               </Button>
             </div>

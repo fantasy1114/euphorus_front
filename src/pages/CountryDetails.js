@@ -3,6 +3,7 @@ import { Button } from "reactstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import Chart from "../components/Chart/Chart";
+import { ClipLoader } from "react-spinners";
 import useCountryData from "../api";
 
 function CountryDetails(props) {
@@ -66,7 +67,9 @@ function CountryDetails(props) {
             </div>
           </>
         ) : (
-          <h3 className="mx-auto">Loading...</h3>
+          <div className="w-100 py-5 text-center">
+            <ClipLoader color="#F96D5C" />
+          </div>
         )}
       </div>
 

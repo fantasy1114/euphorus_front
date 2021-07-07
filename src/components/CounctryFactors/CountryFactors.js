@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import SearchBar from "../SearchBar/SearchBar";
 import Chart from "../Chart/Chart";
+import { ClipLoader } from "react-spinners";
 import useCountryData from "../../api";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
@@ -138,74 +139,83 @@ function CountryFactors() {
             {resultMessage}
           </p>
 
-          <div
-            className="ag-theme-alpine mx-auto "
-            style={{
-              height: "100%",
-            }}
-          >
-            <AgGridReact
-              columnDefs={columns}
-              rowData={rowData}
-              pagination={true}
-              paginationPageSize={40}
-              defaultColDef={{ flex: 1, minWidth: 100 }}
-              domLayout="autoHeight"
-            />
-          </div>
-          {topCountryNames.length > 0 ? (
+          {loading ? (
+            <div className="w-100 d-flex align-items-center justify-content-center my-4">
+              <ClipLoader color="#F96D5C" />
+            </div>
+          ) : (
             <>
-              <h3 className="text-center mt-5">
-                Happiness Factors Comparison {searchYear}
-              </h3>
-              <h4 className="text-center text-muted">(Top 15 Countries)</h4>
-              <Select
-                options={factorOptions}
-                className="react-select-factor"
-                value={factorOptions.filter(
-                  (option) => option.label === selectedFactor
-                )}
-                onChange={(e) => {
-                  if (e.value === "Economy") {
-                    setSelectedFactorData(economyScores);
-                  } else if (e.value === "Family") {
-                    setSelectedFactorData(familyScores);
-                  } else if (e.value === "Health") {
-                    setSelectedFactorData(healthScores);
-                  } else if (e.value === "Freedom") {
-                    setSelectedFactorData(freedomScores);
-                  } else if (e.value === "Family") {
-                    setSelectedFactorData(generosityScores);
-                  } else if (e.value === "Trust") {
-                    setSelectedFactorData(trustScores);
-                  }
-                  setSelectedFactor(e.value);
-                }}
-              />
-              <Chart
-                category={selectedFactor}
-                yAxis={topCountryNames}
-                xAxis={selectedFactorData}
-                label={searchYear}
-              />
-            </>
-          ) : null}
-          <Modal isOpen={modal} toggle={toggleModal} className="">
-            <ModalHeader toggle={toggleModal}>Error</ModalHeader>
-            <ModalBody>
-              Could not find data for '{searchCountry}' in year '{searchYear}'
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                color="primary"
-                onClick={() => {
-                  toggleModal();
+              <div
+                className="ag-theme-alpine mx-auto "
+                style={{
+                  height: "100%",
                 }}
               >
-                Ok
-              </Button>{" "}
-            </ModalFooter>
-          </Modal>
+                <AgGridReact
+                  columnDefs={columns}
+                  rowData={rowData}
+                  pagination={true}
+                  paginationPageSize={40}
+                  defaultColDef={{ flex: 1, minWidth: 100 }}
+                  domLayout="autoHeight"
+                />
+              </div>
+              {topCountryNames.length > 0 ? (
+                <>
+                  <h3 className="text-center mt-5">
+                    Happiness Factors Comparison {searchYear}
+                  </h3>
+                  <h4 className="text-center text-muted">(Top 15 Countries)</h4>
+                  <Select
+                    options={factorOptions}
+                    className="react-select-factor"
+                    value={factorOptions.filter(
+                      (option) => option.label === selectedFactor
+                    )}
+                    onChange={(e) => {
+                      if (e.value === "Economy") {
+                        setSelectedFactorData(economyScores);
+                      } else if (e.value === "Family") {
+                        setSelectedFactorData(familyScores);
+                      } else if (e.value === "Health") {
+                        setSelectedFactorData(healthScores);
+                      } else if (e.value === "Freedom") {
+                        setSelectedFactorData(freedomScores);
+                      } else if (e.value === "Family") {
+                        setSelectedFactorData(generosityScores);
+                      } else if (e.value === "Trust") {
+                        setSelectedFactorData(trustScores);
+                      }
+                      setSelectedFactor(e.value);
+                    }}
+                  />
+                  <Chart
+                    category={selectedFactor}
+                    yAxis={topCountryNames}
+                    xAxis={selectedFactorData}
+                    label={searchYear}
+                  />
+                  <Modal isOpen={modal} toggle={toggleModal} className="">
+                    <ModalHeader toggle={toggleModal}>Error</ModalHeader>
+                    <ModalBody>
+                      Could not find data for '{searchCountry}' in year '
+                      {searchYear}'
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        color="primary"
+                        onClick={() => {
+                          toggleModal();
+                        }}
+                      >
+                        Ok
+                      </Button>{" "}
+                    </ModalFooter>
+                  </Modal>
+                </>
+              ) : null}
+            </>
+          )}
         </>
       ) : (
         // Redirect to Server error page

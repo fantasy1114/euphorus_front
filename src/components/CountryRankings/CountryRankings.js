@@ -15,7 +15,8 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import SearchBar from "../SearchBar/SearchBar";
 import Chart from "../Chart/Chart";
 import useCountryData from "../../api";
-
+import { ClipLoader } from "react-spinners";
+import "./CountryRankings.css";
 function CountryRankings() {
   document.title = "Euphorus | Happiness Rankings";
   const history = useHistory();
@@ -95,28 +96,34 @@ function CountryRankings() {
             {resultMessage}
           </p>
 
-          <div
-            className="ag-theme-alpine mx-auto "
-            style={{
-              height: "100%",
-            }}
-          >
-            <AgGridReact
-              columnDefs={columns}
-              rowData={rowData}
-              pagination={true}
-              paginationPageSize={40}
-              defaultColDef={{ flex: 1, minWidth: 100 }}
-              domLayout="autoHeight"
-              onRowClicked={(row) =>
-                history.push({
-                  pathname: `/details`,
-                  search: `?country=${row.data.country}`,
-                  state: { data: rowData },
-                })
-              }
-            />
-          </div>
+          {loading ? (
+            <div className="w-100 d-flex align-items-center justify-content-center my-4">
+              <ClipLoader color="#F96D5C" />
+            </div>
+          ) : (
+            <div
+              className="ag-theme-alpine mx-auto "
+              style={{
+                height: "100%",
+              }}
+            >
+              <AgGridReact
+                columnDefs={columns}
+                rowData={rowData}
+                pagination={true}
+                paginationPageSize={40}
+                defaultColDef={{ flex: 1, minWidth: 100 }}
+                domLayout="autoHeight"
+                onRowClicked={(row) =>
+                  history.push({
+                    pathname: `/details`,
+                    search: `?country=${row.data.country}`,
+                    state: { data: rowData },
+                  })
+                }
+              />
+            </div>
+          )}
 
           {topCountryNames.length > 0 ? (
             <>

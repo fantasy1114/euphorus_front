@@ -57,7 +57,12 @@ function Footer() {
               <div class="btn-container">
                 <Button
                   className="btn-rounded btn-secondary my-3"
-                  onClick={() => openApi()}
+                  onClick={() =>
+                    window.open(
+                      "https://salty-refuge-23420.herokuapp.com/",
+                      "_blank"
+                    )
+                  }
                 >
                   View API
                 </Button>

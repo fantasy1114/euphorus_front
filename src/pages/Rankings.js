@@ -6,9 +6,6 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 function Rankings() {
-  const openWikiPage = () =>
-    (window.location.href =
-      "https://en.wikipedia.org/wiki/World_Happiness_Report");
   return (
     <div>
       <Jumbotron>
@@ -23,7 +20,12 @@ function Rankings() {
               <Button
                 className="btn-rounded"
                 color="primary"
-                onClick={openWikiPage}
+                onClick={() =>
+                  window.open(
+                    "https://en.wikipedia.org/wiki/World_Happiness_Report",
+                    "_blank"
+                  )
+                }
               >
                 Learn More
               </Button>

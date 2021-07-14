@@ -34,9 +34,9 @@ function CountryRankings() {
   // Table column names
   const columns = [
     { headerName: "Rank", field: "rank", sortable: true },
-    { headerName: "Country", field: "country" },
-    { headerName: "Score", field: "score" },
-    { headerName: "Year", field: "year" },
+    { headerName: "Country", field: "country", sortable: true },
+    { headerName: "Score", field: "score", sortable: true },
+    { headerName: "Year", field: "year", sortable: true },
   ];
   let topCountryNames = [];
   let topHappinessScores = [];

@@ -49,6 +49,9 @@ function Login(props) {
           ) : loginMessage === "Login Successful!" ? (
             <Alert color="success">{loginMessage}</Alert>
           ) : null}
+          <Alert color="danger">
+            Test email: test@mail.com <br></br> Test password: 123
+          </Alert>
           <form className="form mt-4">
             <div className="form-group">
               <input

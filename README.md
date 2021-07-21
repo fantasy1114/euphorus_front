@@ -2,6 +2,8 @@
 
 React application that displays country happiness data. Uses a REST API I created that holds country data collected from the World Happiness Report initiative. Users can register, login and view happiness data by country. Users can filter the data by year, country and search limit. AG Grid and Chart.js were used to present the data.
 
+Can be viewed at https://trusting-babbage-96d918.netlify.app/
+
 ## Technologies used
 
 - React
